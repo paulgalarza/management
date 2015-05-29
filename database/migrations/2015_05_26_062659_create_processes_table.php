@@ -12,12 +12,14 @@ class CreateProcessesTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('processes');
 		Schema::create('processes', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
 			$table->dateTime('start');
 			$table->dateTime('end');
+			$table->integer('activity_id')->unsigned();
 			$table->foreign('activity_id')
       			->references('id')->on('activities')
       			->onDelete('cascade');

@@ -12,9 +12,11 @@ class CreateUserRolesTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('user_roles');
 		Schema::create('user_roles', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('name');
 			$table->timestamps();
 		});
 	}

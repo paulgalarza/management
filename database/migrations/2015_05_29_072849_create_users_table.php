@@ -12,6 +12,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('users');
 		Schema::create('users', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -22,7 +23,7 @@ class CreateUsersTable extends Migration {
 			$table->string('address');
 			$table->string('phone');
 			$table->boolean('status');
-			$table->integer('userRoles_id');
+			$table->integer('userRoles_id')->unsigned();
 			$table->foreign('userRoles_id')
       			->references('id')->on('user_roles')
       			->onDelete('cascade');

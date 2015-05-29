@@ -12,12 +12,13 @@ class CreateMaterialResourcesTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('material_resources');
 		Schema::create('material_resources', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->foreign('provider_id')
-      			->references('id')->on('providers')
+			$table->integer('provider_id')->unsigned();
+			$table->foreign('provider_id')->references('id')->on('providers')
       			->onDelete('cascade');
 			$table->timestamps();
 		});

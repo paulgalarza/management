@@ -12,6 +12,7 @@ class CreateProvidersTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('providers');
 		Schema::create('providers', function(Blueprint $table)
 		{
 			$table->increments('id');

@@ -12,6 +12,7 @@ class CreateCustomersTable extends Migration {
 	 */
 	public function up()
 	{
+		Schema::dropIfExists('customers');
 		Schema::create('customers', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -19,6 +20,7 @@ class CreateCustomersTable extends Migration {
 			$table->string('phone');
 			$table->string('email');
 			$table->boolean('status');
+			$table->integer('company_id')->unsigned();
 			$table->foreign('company_id')
       			->references('id')->on('companies')
       			->onDelete('cascade');
