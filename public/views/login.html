@@ -1,0 +1,30 @@
+ <div class="row login">
+  <div class="col s12 header">
+    <h4 class="light">Iniciar Sesíon</h4>
+  </div>
+  
+  <form class="card white" novalidate ng-submit="login()">
+    <div class="card-content grey-text darken-4">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="user" type="text" class="validate" ng-model="user.user" required>
+          <label for="user">Usuario</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" ng-model="user.password" required>
+          <label for="password">Contraseña</label>
+        </div>
+      </div>
+    </div>
+    <div class="card-action">
+      <div class="row">
+        <div class="col s12">
+          <button class="btn waves-effect waves-light cyan darken-1 login-btn" type="submit" name="action">Iniciar Sesíon
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

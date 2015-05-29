@@ -1,0 +1,27 @@
+.login
+{
+	
+}
+
+.login .header{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.login .card
+{
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.login .login-btn{
+	width: 100%;
+}
+
+nav .button-collapse i{
+	margin-left: 10px;
+}
+.nav-container{
+	padding: 0 20px;
+}
