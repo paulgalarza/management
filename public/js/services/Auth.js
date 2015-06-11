@@ -9,6 +9,9 @@
 				},
 				isLoggedIn : function(){
 					return(user)? user : false;
+				},
+				logIn : function(){
+					
 				}
 			}
 		});

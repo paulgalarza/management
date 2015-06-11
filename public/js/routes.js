@@ -25,7 +25,7 @@
         if (!Auth.isLoggedIn()) {
             console.log('DENY');
             //event.preventDefault();
-            $location.path('/login');
+            //$location.path('/login');
         }
         else {
           if(next.templateUrl == 'views/login.html'){
