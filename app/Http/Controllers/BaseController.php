@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Input;
 
 class BaseController extends Controller {
 
@@ -15,26 +16,22 @@ class BaseController extends Controller {
             
         );
     }
-    public function create() {
-        $customers = new Customer;
-        $customers->name = Input::get('name');
-        $customers->company_id = Input::get('company_id');
-        $customers->phone = Input::get('phone');
-        $customers->email = Input::get('email');
-        $customers->save();
-
-        
+    public function baseCreate($Model) {
+        $params = Input::all();
+        foreach($params as $key => $value) {
+            $Model[$key] = $value;    
+        }
+        $Model->save();
+        return $Model;
     }
 
-    public function update($id) {
-        $customers = Customer::find($id);
-        $customers->name = Input::get('name');
-        $customers->company_id = Input::get('company_id');
-        $clientes->phone = Input::get('phone');
-        $clientes->email = Input::get('email');
-        $clientes->save();
-
-       
+    public function baseUpdate($Model) {
+        $params = Input::all();
+        foreach($params as $key => $value) {
+            $Model[$key] = $value;    
+        }
+        $Model->save();
+        return $Model;
     }
 
     public function destroy($id) {
