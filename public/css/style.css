@@ -25,3 +25,22 @@ nav .button-collapse i{
 .nav-container{
 	padding: 0 20px;
 }
+.menu-selected{
+	font-size: large;
+  	float: right;
+  	margin-left: 10px;
+}
+.side-nav i{
+	float: left;
+	font-size: x-large;
+}
+.side-nav span{
+	float: left;
+  	margin-left: 10px;
+}
+.mdi-navigation-menu{
+	font-size: 2em !important;
+}
+.page-error{
+	text-align: center;
+}

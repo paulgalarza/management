@@ -3,6 +3,8 @@
     angular
         .module('sidcasoft', [
         	'ngRoute',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'ngResource',
+            'smart-table'
         ]);
 })();

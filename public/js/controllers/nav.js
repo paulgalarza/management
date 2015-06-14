@@ -1,32 +1,53 @@
 (function() {
-
-  'use strict';
-    
+    'use strict';
     angular
         .module('sidcasoft')
         .controller('NavController', function($scope, $location, Auth){
-            $scope.isLogged = Auth.isLoggedIn();
+            
+            $scope.isLoggedIn = typeof Auth.getUser() == 'object';
+            $scope.user = {};
+            $scope.menu = '';
+
+            $scope.$on('loginBroadcast', function(event, isLoggedIn) {
+                $scope.isLoggedIn = isLoggedIn;
+                $scope.user = Auth.getUser();
+            });
+
+            $scope.$on('routeBroadcast',function(event, menu){
+                $scope.menu = menu.str;
+            });
 
             $scope.logout = function(){
-                swal({   
-                    title: "¿Desea cerrar sesíon?",   
-                    text: "!",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#DD6B55",   
-                    confirmButtonText: "Yes, delete it!",   
-                    closeOnConfirm: true }, 
+                console.log('logout');
+                swal(
+                    {   
+                        title: "¿Desea cerrar sesíon?",   
+                        text: "",   
+                        type: "warning",   
+                        showCancelButton: true,   
+                        confirmButtonColor: "#DD6B55",   
+                        confirmButtonText: "Cerrar mi sesíon",
+                        cancelButtonText: "No, cancelar",
+                        closeOnConfirm: true 
+                    }, 
                     function(){   
-                        Auth.setUser(undefined);
-                        $location.path( "/login" );
-                    });
+                        Auth.logout(function(){
+                            $location.path('login');
+                        });
+                    }
+                );
             }
 
-
             angular.element(document).ready(function () {
-                console.log('ready');
-                 $(".button-collapse").sideNav();
-                 $(".button-collapse").sideNav();
+                $(".dropdown-button").dropdown({
+                    inDuration: 300,
+                    outDuration: 225,
+                    constrain_width: true,
+                    hover: false,
+                    gutter: 0,
+                    belowOrigin: true
+                });
+                $(".button-collapse").sideNav();
             });
         });
 })();
