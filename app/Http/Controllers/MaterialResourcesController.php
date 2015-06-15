@@ -15,13 +15,13 @@ class MaterialResourcesController extends BaseController {
     }
 
     public function update($id) {
-        $provider = MaterialResources::find($id);
-        return json_encode(parent::baseUpdate($provider));
+        $materialResource = MaterialResources::find($id);
+        return json_encode(parent::baseUpdate($materialResource));
     }
 
     public function destroy($id) {
-        $provider = MaterialResources::find($id);
-        $provider->delete();
+        $materialResource = MaterialResources::find($id);
+        $materialResource->delete();
         return json_encode($id);
     }
 
