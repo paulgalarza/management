@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration {
 			$table->string('username')->unique();
 			$table->string('email')->unique();
 			$table->string('password', 60);
-			$table->string('address');
-			$table->string('phone');
+			$table->string('address')->default('');
+			$table->string('phone')->default('');
 			$table->boolean('status');
 			$table->integer('userRoles_id')->unsigned();
 			$table->foreign('userRoles_id')
