@@ -20,7 +20,7 @@
       controller: 'ProjectsController'
     })
     .when('/empresas',{
-      templateUrl: 'views/companies.html',
+      templateUrl: 'views/companieslist.html',
       controller: 'CompaniesController'
     })
     .otherwise({

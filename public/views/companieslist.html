@@ -1,0 +1,59 @@
+
+<div ng-hide="formEmpresa">
+	<table st-table="displayedCollection" st-safe-src="companies" class="hoverable responsive-table collection white">
+		<thead>
+			<tr>
+				<th colspan="6">
+					<h5>Empresas</h5>
+				</th>
+				<th>
+					<i class="mdi-navigation-more-vert"></i>
+				</th>
+			</tr>
+			<tr class="grey-text">
+				<th>
+					<input type="checkbox" id="selectAll" />
+					<label for="selectAll"></label>
+				</th>
+				<th st-sort="name">
+					<i class="mdi-hardware-keyboard-arrow-down left Small"></i>
+					<i class="mdi-hardware-keyboard-arrow-up left Small"></i>
+					Nombre
+				</th>
+				<th st-sort="address">Dirección</th>
+				<th st-sort="phone">Telefono</th>
+				<th st-sort="RFC">RFC</th>
+				<th st-sort="manager">Encargado</th>
+				<th st-sort="status">Estatus</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="company in displayedCollection" ng-class="" ng-click="">
+				<td>
+					<input type="checkbox" id="select-{{company.id}}" />
+					<label for="select-{{company.id}}"></label>
+				</td>
+				<td>{{company.name | uppercase}}</td>
+				<td>{{company.address}}</td>
+				<td>{{company.phone | uppercase}}</td>
+				<td>{{company.RFC}}</td>
+				<td>{{company.manager}}</td>
+				<td>{{getStatus(company.status)}}</td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="7" class="center">
+					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+	<a class="btn-floating btn-large red">
+		<i class="large mdi-content-add"></i>
+	</a>
+</div>
