@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('NavController', function($scope, $location, Auth){
+        .controller('NavController', function($scope, $location, $route, Auth){
             
             $scope.isLoggedIn = typeof Auth.getUser() == 'object';
             $scope.user = {};
@@ -16,6 +16,10 @@
             $scope.$on('routeBroadcast',function(event, menu){
                 $scope.menu = menu.str;
             });
+
+            $scope.refresh = function(){
+                $route.reload();
+            };
 
             $scope.logout = function(){
                 console.log('logout');
@@ -36,7 +40,7 @@
                         });
                     }
                 );
-            }
+            };
 
             angular.element(document).ready(function () {
                 $(".dropdown-button").dropdown({

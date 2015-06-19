@@ -1,46 +1,78 @@
-.login
-{
-	
-}
+ body {
+ 	display: flex;
+ 	min-height: 100vh;
+ 	flex-direction: column;
+ 	background-color: #fcfcfc;
+ }
 
-.login .header{
-	text-align: center;
-	margin-top: 20px;
-}
+ main {
+ 	flex: 1 0 auto;
+ }
 
-.login .card
-{
-	width: 400px;
-	margin: 0 auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
-.login .login-btn{
-	width: 100%;
-}
+ .login .header{
+ 	text-align: center;
+ 	margin-top: 20px;
+ }
 
-nav .button-collapse i{
-	margin-left: 10px;
-}
-.nav-container{
-	padding: 0 20px;
-}
-.menu-selected{
-	font-size: large;
-  	float: right;
-  	margin-left: 10px;
-}
-.side-nav i{
-	float: left;
-	font-size: x-large;
-}
-.side-nav span{
-	float: left;
-  	margin-left: 10px;
-}
-.mdi-navigation-menu{
-	font-size: 2em !important;
-}
-.page-error{
-	text-align: center;
-}
+ .login .card
+ {
+ 	width: 400px;
+ 	margin: 0 auto;
+ 	margin-top: 50px;
+ 	margin-bottom: 50px;
+ }
+ .login .login-btn{
+ 	width: 100%;
+ }
+
+ nav .button-collapse i{
+ 	margin-left: 10px;
+ }
+ .nav-container{
+ 	padding: 0 20px;
+ }
+ .menu-selected{
+ 	font-size: large;
+ 	float: right;
+ 	margin-left: 10px;
+ }
+ .side-nav i{
+ 	float: left;
+ 	font-size: x-large;
+ }
+ .side-nav span{
+ 	float: left;
+ 	margin-left: 10px;
+ }
+ .mdi-navigation-menu{
+ 	font-size: 2em !important;
+ }
+ .page-error{
+ 	text-align: center;
+ }
+ .container{
+ 	padding-top: 40px !important;
+ }
+ table label{
+ 	margin-left: 20px;
+ 	margin-top: 10px;
+ }
+ table th{
+ 	padding: 5px;
+	cursor: default;
+ }
+ table td{
+ 	padding: 5px;
+ }
+ table th i{
+ 	display: none;
+ }
+ .st-sort-descent .mdi-hardware-keyboard-arrow-down{
+	display: block !important;
+ }
+ .st-sort-ascent .mdi-hardware-keyboard-arrow-up{
+ 	display: block !important;
+ }
+ table h5{
+ 	margin-left: 18px;
+ }

@@ -9,11 +9,29 @@
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 </head>
 <body>
-  <nav ng-controller="NavController" class="cyan darken-1" ng-show="isLoggedIn">
+  <nav ng-controller="NavController" class="cyan darken-1" ng-show="isLoggedIn" ng-cloak>
     <div class="nav-container">
     <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i><span class="menu-selected"> {{menu}}</span></a>
       <div class="nav-wrapper">
+        <div class="brand-logo center" style="width: 50%;">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" placeholder="buscar...">
+              <label for="search"><i class="mdi-action-search"></i></label>
+              <i class="mdi-navigation-close"></i>
+            </div>
+          </form>
+        </div>
         <ul class="right hide-on-med-and-down">
+          <li>
+            
+          </li>
+          <li>
+            <a href=""><i class="mdi-action-view-module"></i></a>
+          </li>
+          <li>
+            <a href="" ng-click="refresh()"><i class="mdi-navigation-refresh"></i></a>
+          </li>
           <li>
             <a class="dropdown-button" href="#!" data-activates="dropdown1">
               <i class="mdi-action-account-circle left"></i>
@@ -27,7 +45,7 @@
 
     <!-- Structures -->
     <ul id="dropdown1" class="dropdown-content">
-      <li><a ng-click="logout()">Cerrar sesíon</a></li>
+      <li><a ng-click="logout()">Cerrar sesión</a></li>
     </ul>
     <ul id="slide-out" class="side-nav">
       <li><a href="#/home"><i class="mdi-action-view-list"></i><span> Dashboard</span></a></li>
@@ -66,10 +84,9 @@
   </nav>
 
   <div ng-view class="container"></div> 
+  <div ng-include="views/footer.html"></div>
 
 </body>
-<div ng-include="'views/footer.html'"></div>
-
 
 <!-- Application Dependencies -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -90,9 +107,11 @@
 <script src="js/services/Auth.js"></script>
 <script src="js/services/Underscore.js"></script>
 <script src="js/services/Providers.js"></script>
+<script src="js/services/Companies.js"></script>
 <script src="js/controllers/Login.js"></script>
 <script src="js/controllers/Home.js"></script>
 <script src="js/controllers/Nav.js"></script>
 <script src="js/controllers/Projects.js"></script>
+<script src="js/controllers/Companies.js"></script>
 
 </html>

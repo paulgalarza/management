@@ -19,6 +19,10 @@
       templateUrl: 'views/projects.html',
       controller: 'ProjectsController'
     })
+    .when('/empresas',{
+      templateUrl: 'views/companies.html',
+      controller: 'CompaniesController'
+    })
     .otherwise({
       templateUrl: 'views/404.html'
     })
@@ -34,6 +38,10 @@
       {
         str: 'Proyectos',
         url: 'views/projects.html'
+      },
+      {
+        str: 'Empresas',
+        url: 'views/companies.html'
       },
       {
         str: '',
