@@ -20,6 +20,11 @@ Route::put('companies/{id}', 'CompanyController@update');
 Route::post('companies', 'CompanyController@create');
 Route::delete('companies/{id}', 'CompanyController@destroy');
 
+Route::get('customers', 'CustomerController@load');
+Route::put('customers/{id}', 'CustomerController@update');
+Route::post('customers', 'CustomerController@create');
+Route::delete('customers/{id}', 'CustomerController@destroy');
+
 Route::get('processes', 'ProcessController@load');
 Route::put('processes/{id}', 'ProcessController@update');
 Route::post('processes', 'ProcessController@create');

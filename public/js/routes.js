@@ -16,12 +16,12 @@
       controller: 'HomeController'
     })
     .when('/proyectos',{
-      templateUrl: 'views/projects.html',
-      controller: 'ProjectsController'
+      templateUrl: 'views/projectslist.html',
+      controller: 'ProjectsListController'
     })
     .when('/empresas',{
       templateUrl: 'views/companieslist.html',
-      controller: 'CompaniesController'
+      controller: 'CompaniesListController'
     })
     .otherwise({
       templateUrl: 'views/404.html'
@@ -37,11 +37,11 @@
       },
       {
         str: 'Proyectos',
-        url: 'views/projects.html'
+        url: 'views/projectslist.html'
       },
       {
         str: 'Empresas',
-        url: 'views/companies.html'
+        url: 'views/companieslist.html'
       },
       {
         str: '',
