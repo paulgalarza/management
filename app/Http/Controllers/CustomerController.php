@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customers;
 use Input;
 
-class CustomerController extends Controller {
+class CustomerController extends BaseController {
 
     public function load() {
         $id = Input::get('id');
@@ -19,6 +19,7 @@ class CustomerController extends Controller {
     }
 
     public function update($id) {
+        $id = Input::get('id');
         $customer = Customers::find($id);
         return json_encode(parent::baseUpdate($customer));
     }
