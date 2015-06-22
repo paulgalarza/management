@@ -17,11 +17,11 @@ class CreateCompaniesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('address');
-			$table->string('phone');
-			$table->string('RFC');
-			$table->boolean('status');
-			$table->string('manager');
+			$table->string('address')->nullable();
+			$table->string('phone')->nullable();
+			$table->string('RFC')->nullable();
+			$table->boolean('status')->default(true);
+			$table->string('manager')->nullable();
 			$table->timestamps();
 		});
 	}

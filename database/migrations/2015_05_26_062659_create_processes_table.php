@@ -17,9 +17,9 @@ class CreateProcessesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->dateTime('start');
-			$table->dateTime('end');
-			$table->integer('activity_id')->unsigned();
+			$table->dateTime('start')->nullable();
+			$table->dateTime('end')->nullable();
+			$table->integer('activity_id')->unsigned()->nullable();
 			$table->foreign('activity_id')
       			->references('id')->on('activities')
       			->onDelete('cascade');
