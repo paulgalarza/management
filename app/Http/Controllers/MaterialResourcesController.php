@@ -7,7 +7,11 @@ use Input;
 class MaterialResourcesController extends BaseController {
 
     public function load() {
-        return json_encode(MaterialResources::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(MaterialResources::all());
+        }
+        return json_encode(MaterialResources::find($id));
     }
 
     public function create() {

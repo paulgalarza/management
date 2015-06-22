@@ -7,9 +7,12 @@ use Input;
 class ActivityController extends BaseController {
 
     public function load() {
-        return json_encode(Activity::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(Activity::all());
+        }
+        return json_encode(Activity::find($id));
     }
-
     public function create() {
         return json_encode(parent::baseCreate(new Activity));
     }

@@ -7,7 +7,11 @@ use Input;
 class ProjectStatusController extends BaseController {
 
     public function load() {
-        return json_encode(ProjectStatus::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(ProjectStatus::all());
+        }
+        return json_encode(ProjectStatus::find($id));
     }
 
     public function create() {
