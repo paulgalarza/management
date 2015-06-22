@@ -54,9 +54,8 @@
                 <div class="col s7">
                     <div class="switch">
                         <label>
-                            Inactivo
-                            <input type="checkbox" id="status" ng-model="company._status">
-                            <span class="lever"></span> Activo
+                            <input type="checkbox" id="status" ng-model="company._status" ng-change="changeStatus()">
+                            <span class="lever"></span> {{company.strStatus}}
                         </label>
                     </div>
                 </div>
