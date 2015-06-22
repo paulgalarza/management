@@ -2,34 +2,35 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('ProjectsListController', function($scope, $location, Projects) {
+        .controller('UsersListController', function($scope, $location, Users) {
             $scope.itemsByPage = 10;
             $scope.displayedCollection = [];
-            $scope.projects = [];
+            $scope.users = [];
             $scope.selected = '';
+            $scope.user = {};
 
             var init = function() {
-                $scope.projects = Projects.query(function() {
-                    $scope.displayedCollection = $scope.projects.slice(0);
+                $scope.users = Users.query(function() {
+                    $scope.displayedCollection = $scope.users.slice(0);
                 });
             }
             init();
 
             $scope.getStatus = function(status) {
                 return status ? 'Activo' : 'Cancelado';
-            };
+            }
 
             $scope.select = function(id) {
                 $scope.selected = id;
-            };
+            }
 
-            $scope.newProject = function() {
-                $('#projectModal').openModal();
+            $scope.newUser = function() {
+                $('#userModal').openModal();
             }
 
             $scope.save = function() {
-                Projects.save($scope.project, function(project) {
-                    $location.path('/proyectos/' + project.id);
+                Users.save($scope.user, function(user) {
+                	$location.path('/usuarios/'+user.id);
                 });
             }
         });
