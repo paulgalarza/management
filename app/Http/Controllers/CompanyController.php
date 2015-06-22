@@ -7,7 +7,11 @@ use Input;
 class CompanyController extends BaseController {
 
     public function load() {
-        return json_encode(Companies::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(Companies::all());
+        }
+        return json_encode(Companies::find($id));
     }
 
     public function create() {

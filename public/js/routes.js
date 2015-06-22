@@ -21,6 +21,10 @@
     })
     .when('/empresas',{
       templateUrl: 'views/companieslist.html',
+      controller: 'CompaniesListController'
+    })
+    .when('/empresas/:companyId',{
+      templateUrl: 'views/companies.html',
       controller: 'CompaniesController'
     })
     .otherwise({
