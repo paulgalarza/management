@@ -43,6 +43,10 @@
                     templateUrl: 'views/user.html',
                     controller: 'UserController'
                 })
+                .when('/requerimiento', {
+                    templateUrl: 'views/requirement.html',
+                    controller: 'RequirementController'
+                })
                 .otherwise({
                     templateUrl: 'views/404.html'
                 })
@@ -71,6 +75,9 @@
             }, {
                 str: '',
                 url: 'views/404.html'
+            }, {
+                str: 'Requerimiento',
+                url: 'views/requirement.html'
             }];
 
             $rootScope.$on('$routeChangeStart', function(event, next) {

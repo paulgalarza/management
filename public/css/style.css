@@ -97,6 +97,8 @@
  
  .form {
      padding-top: 20px;
+     padding-bottom: 20px;
+     overflow: inherit !important;
  }
  
  .form label {
@@ -116,4 +118,12 @@
  .form .header {
      padding-left: 10px;
      padding-right: 10px;
+ }
+ 
+ .dropdown-content {
+     z-index: 100;
+ }
+ 
+ .form .input-field {
+     margin-top: 0px;
  }

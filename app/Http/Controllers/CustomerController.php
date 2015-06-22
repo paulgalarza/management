@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customers;
 use Input;
 
-class CustomerController extends Controller {
+class CustomerController extends BaseController {
 
     public function load() {
         $id = Input::get('id');
