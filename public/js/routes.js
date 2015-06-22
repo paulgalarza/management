@@ -44,6 +44,9 @@
                 str: 'Empresas',
                 url: 'views/companieslist.html'
             }, {
+                str: 'Empresa',
+                url: 'views/companies.html'
+            }, {
                 str: '',
                 url: 'views/404.html'
             }];

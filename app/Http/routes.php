@@ -16,7 +16,7 @@ Route::post('activities', 'ActivityController@create');
 Route::delete('activities/{id}', 'ActivityController@destroy');
 
 Route::get('companies', 'CompanyController@load');
-Route::put('companies/{id}', 'CompanyController@update');
+Route::put('companies', 'CompanyController@update');
 Route::post('companies', 'CompanyController@create');
 Route::delete('companies/{id}', 'CompanyController@destroy');
 

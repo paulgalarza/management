@@ -18,7 +18,8 @@ class CompanyController extends BaseController {
         return json_encode(parent::baseCreate(new Companies));
     }
 
-    public function update($id) {
+    public function update() {
+        $id = Input::get('id');
         $company = Companies::find($id);
         return json_encode(parent::baseUpdate($company));
     }

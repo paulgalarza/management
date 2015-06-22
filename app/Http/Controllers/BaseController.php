@@ -34,7 +34,8 @@ class BaseController extends Controller {
     public function baseUpdate($Model) {
         $params = Input::all();
         foreach($params as $key => $value) {
-            $Model[$key] = $value;    
+            if($this->isValidKey($key) && isset($Model[$key]))
+                $Model[$key] = $value;    
         }
         $Model->save();
         return $Model;
@@ -46,4 +47,7 @@ class BaseController extends Controller {
         
     }
 
+    private function isValidKey($key){
+        return $key !== 'updated_at'  && $key !== 'created_at';
+    }
 }
