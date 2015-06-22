@@ -7,7 +7,11 @@ use Input;
 class ProcessController extends BaseController {
 
     public function load() {
-        return json_encode(Processes::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(Processes::all());
+        }
+        return json_encode(Processes::find($id));
     }
 
     public function create() {

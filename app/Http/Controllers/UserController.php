@@ -7,7 +7,11 @@ use Input;
 class UserController extends BaseController {
 
     public function load() {
-        return json_encode(Users::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(Users::all());
+        }
+        return json_encode(Users::find($id));
     }
 
     public function create() {

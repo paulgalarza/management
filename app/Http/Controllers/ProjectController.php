@@ -7,7 +7,11 @@ use Input;
 class ProjectController extends BaseController {
 
     public function load() {
-        return json_encode(Projects::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(Projects::all());
+        }
+        return json_encode(Projects::find($id));
     }
 
     public function create() {

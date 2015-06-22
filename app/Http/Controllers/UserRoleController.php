@@ -7,7 +7,11 @@ use Input;
 class UserRoleController extends BaseController {
 
     public function load() {
-        return json_encode(UserRoles::all());
+        $id = Input::get('id');
+        if($id == 0){
+            return json_encode(UserRoles::all());
+        }
+        return json_encode(UserRoles::find($id));
     }
 
     public function create() {
