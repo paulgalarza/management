@@ -17,10 +17,10 @@ class CreateCustomersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('phone');
-			$table->string('email');
-			$table->boolean('status');
-			$table->integer('company_id')->unsigned();
+			$table->string('phone')->nullable();
+			$table->string('email')->nullable();
+			$table->boolean('status')->nullable();
+			$table->integer('company_id')->unsigned()->nullable();
 			$table->foreign('company_id')
       			->references('id')->on('companies')
       			->onDelete('cascade');

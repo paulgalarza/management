@@ -17,7 +17,7 @@ class CreateMaterialResourcesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('provider_id')->unsigned();
+			$table->integer('provider_id')->unsigned()->nullable();
 			$table->foreign('provider_id')->references('id')->on('providers')
       			->onDelete('cascade');
 			$table->timestamps();

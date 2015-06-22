@@ -17,27 +17,27 @@ class CreateProjectsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('description');
-			$table->dateTime('start');
-			$table->dateTime('end');
-			$table->decimal('cost', 7, 6);
-			$table->integer('projectStatus_id')->unsigned();
+			$table->string('description')->nullable();
+			$table->dateTime('start')->nullable();
+			$table->dateTime('end')->nullable();
+			$table->decimal('cost', 7, 6)->nullable();
+			$table->integer('projectStatus_id')->unsigned()->nullable();
 			$table->foreign('projectStatus_id')
       			->references('id')->on('project_statuses')
       			->onDelete('cascade');
-      		$table->integer('customer_id')->unsigned();
+      		$table->integer('customer_id')->unsigned()->nullable();
       		$table->foreign('customer_id')
       			->references('id')->on('customers')
       			->onDelete('cascade');
-      		$table->integer('company_id')->unsigned();
+      		$table->integer('company_id')->unsigned()->nullable();
       		$table->foreign('company_id')
       			->references('id')->on('companies')
       			->onDelete('cascade');
-      		$table->integer('materialResource_id')->unsigned();
+      		$table->integer('materialResource_id')->unsigned()->nullable();
       		$table->foreign('materialResource_id')
       			->references('id')->on('material_resources')
       			->onDelete('cascade');
-      		$table->integer('process_id')->unsigned();
+      		$table->integer('process_id')->unsigned()->nullable();
       		$table->foreign('process_id')
       			->references('id')->on('processes')
       			->onDelete('cascade');
