@@ -1,0 +1,33 @@
+<div ng-hide="formCustomers">
+    <ul class="collection">
+        <li class="collection-item avatar" ng-repeat="customer in customers">
+            <img class="circle" src="//g-design.storage.googleapis.com/production/v3/assets/motion_designer_ff5151_v2-36022296.svg" style="background-color: #ec4559;width:60px;height:60px;">
+            <div style="margin-left:20px;">
+                <strong class="title" style="font-size: 1.2em;">{{customer.name | uppercase}}</strong>
+                <p>{{customer.phone}}
+                    <br> {{customer.email}}
+                </p>
+            </div>
+            <a href="#customers/{{customer.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
+        </li>
+    </ul>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-click="newCustomer()">
+    <a class="btn-floating btn-large red">
+        <i class="large mdi-content-add"></i>
+    </a>
+</div>
+
+<!-- Modal Structure -->
+<div id="customerModal" class="modal" ng-form="customerForm">
+    <div class="modal-content">
+        <h5>Nuevo Cliente</h5>
+        <div class="input-field col s6">
+            <input placeholder="" id="name" type="text" class="validate" ng-model="customer.name" required>
+            <label for="name">Nombrel cliente</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="customerForm.$invalid">Guardar</a>
+    </div>
+</div>

@@ -24,8 +24,24 @@
                     controller: 'CompaniesListController'
                 })
                 .when('/empresas/:companyId', {
-                    templateUrl: 'views/companies.html',
-                    controller: 'CompaniesController'
+                    templateUrl: 'views/company.html',
+                    controller: 'CompanyController'
+                })
+                .when('/clientes', {
+                    templateUrl: 'views/customerslist.html',
+                    controller: 'CustomersListController'
+                })
+                .when('/clientes/:customerId', {
+                    templateUrl: 'views/customer.html',
+                    controller: 'CustomerController'
+                })
+                .when('/usuarios', {
+                    templateUrl: 'views/userslist.html',
+                    controller: 'UsersListController'
+                })
+                .when('/usuarios/:userId', {
+                    templateUrl: 'views/user.html',
+                    controller: 'UserController'
                 })
                 .otherwise({
                     templateUrl: 'views/404.html'
@@ -43,6 +59,12 @@
             }, {
                 str: 'Empresas',
                 url: 'views/companieslist.html'
+            }, {
+                str: 'Clientes',
+                url: 'views/customerslist.html'
+            }, {
+                str: 'Usuarios',
+                url: 'views/userslist.html'
             }, {
                 str: '',
                 url: 'views/404.html'

@@ -1,0 +1,33 @@
+<div ng-hide="formUsers">
+    <ul class="collection">
+        <li class="collection-item avatar" ng-repeat="user in users">
+            <img class="circle" src="//g-design.storage.googleapis.com/production/v3/assets/about_social_medium_v2-aab45a9c.svg" style="background-color: #424242;width:60px;height:60px;">
+            <div style="margin-left:20px;">
+                <strong class="title" style="font-size: 1.2em;">{{user.name | uppercase}}</strong>
+                <p>{{user.email}}
+                    <br> {{}}
+                </p>
+            </div>
+            <a href="#usuarios/{{user.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
+        </li>
+    </ul>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-click="newUser()">
+    <a class="btn-floating btn-large red">
+        <i class="large mdi-content-add"></i>
+    </a>
+</div>
+
+<!-- Modal Structure -->
+<div id="userModal" class="modal" ng-form="userForm">
+    <div class="modal-content">
+        <h5>Nuevo usuario</h5>
+        <div class="input-field col s6">
+            <input placeholder="" id="name" type="text" class="validate" ng-model="user.name" required>
+            <label for="name">Nombre del usuario</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="userForm.$invalid">Guardar</a>
+    </div>
+</div>
