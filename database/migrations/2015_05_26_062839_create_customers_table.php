@@ -16,11 +16,11 @@ class CreateCustomersTable extends Migration {
 		Schema::create('customers', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('phone')->nullable();
-			$table->string('email')->nullable();
+			$table->string('name')->default('');
+			$table->string('phone')->nullable()->default('');
+			$table->string('email')->nullable()->default('');
 			$table->boolean('status')->nullable()->default(true);
-			$table->integer('company_id')->unsigned()->nullable();
+			$table->integer('company_id')->unsigned()->nullable()->default(0);
 			$table->foreign('company_id')
       			->references('id')->on('companies')
       			->onDelete('cascade');

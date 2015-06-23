@@ -16,10 +16,10 @@ class CreateProcessesTable extends Migration {
 		Schema::create('processes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->dateTime('start')->nullable();
-			$table->dateTime('end')->nullable();
-			$table->integer('activity_id')->unsigned()->nullable();
+			$table->string('name')->default('');
+			$table->dateTime('start')->nullable()->default(date("Y-m-d H:i:s"));
+			$table->dateTime('end')->nullable()->default(date("Y-m-d H:i:s"));
+			$table->integer('activity_id')->unsigned()->nullable()->default(0);
 			$table->foreign('activity_id')
       			->references('id')->on('activities')
       			->onDelete('cascade');

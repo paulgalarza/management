@@ -16,28 +16,28 @@ class CreateProjectsTable extends Migration {
 		Schema::create('projects', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('description')->nullable();
-			$table->dateTime('start')->nullable();
-			$table->dateTime('end')->nullable();
-			$table->decimal('cost', 7, 6)->nullable();
-			$table->integer('projectStatus_id')->unsigned()->nullable();
+			$table->string('name')->default('');
+			$table->string('description')->nullable()->default('');
+			$table->dateTime('start')->nullable()->default(date("Y-m-d H:i:s"));
+			$table->dateTime('end')->nullable()->default(date("Y-m-d H:i:s"));
+			$table->decimal('cost', 7, 6)->nullable()->default(0);
+			$table->integer('projectStatus_id')->unsigned()->nullable()->default(0);
 			$table->foreign('projectStatus_id')
       			->references('id')->on('project_statuses')
       			->onDelete('cascade');
-      		$table->integer('customer_id')->unsigned()->nullable();
+      		$table->integer('customer_id')->unsigned()->nullable()->default(0);
       		$table->foreign('customer_id')
       			->references('id')->on('customers')
       			->onDelete('cascade');
-      		$table->integer('company_id')->unsigned()->nullable();
+      		$table->integer('company_id')->unsigned()->nullable()->default(0);
       		$table->foreign('company_id')
       			->references('id')->on('companies')
       			->onDelete('cascade');
-      		$table->integer('materialResource_id')->unsigned()->nullable();
+      		$table->integer('materialResource_id')->unsigned()->nullable()->default(0);
       		$table->foreign('materialResource_id')
       			->references('id')->on('material_resources')
       			->onDelete('cascade');
-      		$table->integer('process_id')->unsigned()->nullable();
+      		$table->integer('process_id')->unsigned()->nullable()->default(0);
       		$table->foreign('process_id')
       			->references('id')->on('processes')
       			->onDelete('cascade');

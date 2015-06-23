@@ -33,15 +33,11 @@ class BaseController extends Controller {
 
     public function baseUpdate($Model) {
         $params = Input::all();
-        $params = array_filter($params, function($paramKey){
-            return $this->isValidKey($paramKey);
-        }, ARRAY_FILTER_USE_KEY);
-        $Model->update($params);
-        // foreach($params as $key => $value) {
-        //     if($this->isValidKey($key) && isset($Model[$key]))
-        //         $Model[$key] = $value;    
-        // }
-        // $Model->save();
+        foreach($params as $key => $value) {
+            if($this->isValidKey($key) && isset($Model[$key]))
+                $Model[$key] = $value; 
+        }
+        $Model->save();
         return $Model;
     }
 
