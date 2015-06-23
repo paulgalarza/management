@@ -21,7 +21,7 @@ Route::post('companies', 'CompanyController@create');
 Route::delete('companies/{id}', 'CompanyController@destroy');
 
 Route::get('customers', 'CustomerController@load');
-Route::put('customers/{id}', 'CustomerController@update');
+Route::put('customers', 'CustomerController@update');
 Route::post('customers', 'CustomerController@create');
 Route::delete('customers/{id}', 'CustomerController@destroy');
 
@@ -46,7 +46,7 @@ Route::post('userroles', 'UserRoleController@create');
 Route::delete('userroles/{id}', 'UserRoleController@destroy');
 
 Route::get('users', 'UserController@load');
-Route::put('users/{id}', 'UserController@update');
+Route::put('users', 'UserController@update');
 Route::post('users', 'UserController@create');
 Route::delete('users/{id}', 'UserController@destroy');
 

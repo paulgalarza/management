@@ -18,7 +18,7 @@ class CustomerController extends BaseController {
         return json_encode(parent::baseCreate(new Customers));
     }
 
-    public function update($id) {
+    public function update() {
         $id = Input::get('id');
         $customer = Customers::find($id);
         return json_encode(parent::baseUpdate($customer));

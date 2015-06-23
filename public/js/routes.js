@@ -70,8 +70,14 @@
                 str: 'Clientes',
                 url: 'views/customerslist.html'
             }, {
+                str: 'Cliente',
+                url: 'views/customer.html'
+            }, {
                 str: 'Usuarios',
                 url: 'views/userslist.html'
+            }, {
+                str: 'Usuario',
+                url: 'views/user.html'
             }, {
                 str: '',
                 url: 'views/404.html'

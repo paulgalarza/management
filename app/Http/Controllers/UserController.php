@@ -18,7 +18,8 @@ class UserController extends BaseController {
         return json_encode(parent::baseCreate(new Users));
     }
 
-    public function update($id) {
+     public function update() {
+        $id = Input::get('id');
         $user = Users::find($id);
         return json_encode(parent::baseUpdate($user));
     }

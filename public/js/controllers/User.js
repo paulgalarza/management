@@ -2,26 +2,23 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('CustomerController', function($scope, $routeParams, Customers, Companies) {
-            Customers.get({
-                id: $routeParams.customerId
-            }, function(customer) {
-                $scope.customer = customer;
+        .controller('UserController', function($scope, $routeParams, Users) {
+            Users.get({
+                id: $routeParams.userId
+            }, function(user) {
+                $scope.user = user;
                 init();
             });
 
-            $scope.companies = Companies.query();
-
             var init = function() {
-                $scope.customer._status = $scope.customer.status && true;
+                $scope.user._status = $scope.user.status && true;
                 $scope.changeStatus();
-                $scope.customer.company_id = 0;
+                $scope.user.company_id = 0;
             }
 
             $scope.save = function() {
-                console.log($scope.customer);
-                $scope.customer.status = $scope.customer._status ? 1 : 0;
-                $scope.customer.$update(function(customer) {
+                $scope.user.status = $scope.user._status ? 1 : 0;
+                $scope.user.$update(function(user) {
                     init();
                     swal("Guardado exitoso!", "Los cambios han sido guardados correctamente!", "success");
 
@@ -33,7 +30,7 @@
             };
 
             $scope.changeStatus = function() {
-                $scope.customer.strStatus = $scope.getStatus($scope.customer._status);
+                $scope.user.strStatus = $scope.getStatus($scope.user._status);
             };
 
 

@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration {
 			$table->string('name');
 			$table->string('phone')->nullable();
 			$table->string('email')->nullable();
-			$table->boolean('status')->nullable();
+			$table->boolean('status')->nullable()->default(true);
 			$table->integer('company_id')->unsigned()->nullable();
 			$table->foreign('company_id')
       			->references('id')->on('companies')
