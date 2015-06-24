@@ -5,6 +5,7 @@
         	'ngRoute',
             'ui.bootstrap',
             'ngResource',
-            'smart-table'
+            'smart-table',
+            'ui.materialize'
         ]);
 })();
