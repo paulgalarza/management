@@ -43,9 +43,13 @@
                     templateUrl: 'views/user.html',
                     controller: 'UserController'
                 })
-                .when('/requerimiento', {
+                .when('/requerimiento/:requirementId', {
                     templateUrl: 'views/requirement.html',
                     controller: 'RequirementController'
+                })
+                .when('/requerimientos', {
+                    templateUrl: 'views/requirementslist.html',
+                    controller: 'RequirementsListController'
                 })
                 .otherwise({
                     templateUrl: 'views/404.html'
@@ -84,6 +88,9 @@
             }, {
                 str: 'Requerimiento',
                 url: 'views/requirement.html'
+            }, {
+                str: 'Requerimientos',
+                url: 'views/requirementslist.html'
             }];
 
             $rootScope.$on('$routeChangeStart', function(event, next) {
