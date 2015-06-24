@@ -15,7 +15,7 @@ class CreateProjectStatusesTable extends Migration {
 		Schema::dropIfExists('project_statuses');
 		Schema::create('project_statuses', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->integer('id')->default(0);
 			$table->string('name')->default('');
 			$table->timestamps();
 		});

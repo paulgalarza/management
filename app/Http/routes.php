@@ -53,3 +53,8 @@ Route::delete('users/{id}', 'UserController@destroy');
 Route::post('login','LoginController@authenticate');
 Route::post('logout','LoginController@logout');
 Route::get('isLoggedIn','LoginController@isLoggedIn');
+
+Route::get('requirements', 'RequirementController@load');
+Route::put('requirements', 'RequirementController@update');
+Route::post('requirements', 'RequirementController@create');
+Route::delete('requirements', 'RequirementController@destroy');

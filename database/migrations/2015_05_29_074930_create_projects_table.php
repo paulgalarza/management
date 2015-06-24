@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\ProjectStatus;
 
 class CreateProjectsTable extends Migration {
 
@@ -21,10 +22,10 @@ class CreateProjectsTable extends Migration {
 			$table->dateTime('start')->nullable()->default(date("Y-m-d H:i:s"));
 			$table->dateTime('end')->nullable()->default(date("Y-m-d H:i:s"));
 			$table->decimal('cost', 7, 6)->nullable()->default(0);
-			$table->integer('projectStatus_id')->unsigned()->nullable()->default(0);
-			$table->foreign('projectStatus_id')
-      			->references('id')->on('project_statuses')
-      			->onDelete('cascade');
+			$table->integer('projectStatus_id')->unsigned()->nullable()->default(ProjectStatus::PROSPECTO);
+			// $table->foreign('projectStatus_id')
+   //    			->references('id')->on('project_statuses')
+   //    			->onDelete('cascade');
       		$table->integer('customer_id')->unsigned()->nullable()->default(0);
       		$table->foreign('customer_id')
       			->references('id')->on('customers')

@@ -79,6 +79,30 @@
      display: none;
  }
  
+ tr th:first-child {
+     width: 20px;
+ }
+ .modal{
+     width: 600px !important;
+ }
+ 
+ #table {
+     margin-top: 0px;
+ }
+ #requirementModal{
+     height: 400px;
+ }
+ .grid .title {
+     border: 1px solid #e0e0e0;
+     border-bottom: 0px;
+     padding: 20px;
+ }
+ 
+ .title span {
+     font-size: large;
+     font-weight: bold;
+ }
+ 
  .st-sort-descent .mdi-hardware-keyboard-arrow-down {
      display: block !important;
  }

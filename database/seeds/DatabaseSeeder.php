@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProjectStatus;
 
 class DatabaseSeeder extends Seeder {
 	public function run()
@@ -10,6 +11,7 @@ class DatabaseSeeder extends Seeder {
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		$this->call('UserRoles');
 		$this->call('UserTableSeeder');
+        $this->call('ProjectStatusSeeder');
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }	
@@ -35,6 +37,32 @@ class UserTableSeeder extends Seeder {
             'phone'		=> '',
             'status'	=> true,
             'userRoles_id'=> 1
+        ]);
+	}
+}
+
+class ProjectStatusSeeder extends Seeder {
+	public function run(){
+		DB::table('project_statuses')->truncate();
+		DB::table('project_statuses')->insert([
+            'id' 		=> ProjectStatus::PROSPECTO,
+            'name'		=> 'prospecto'
+        ]);
+        DB::table('project_statuses')->insert([
+            'id' 		=> ProjectStatus::APROBADO,
+            'name'		=> 'aprobado'
+        ]);
+        DB::table('project_statuses')->insert([
+            'id' 		=> ProjectStatus::DESARROLLO,
+            'name'		=> 'desarrollo'
+        ]);
+        DB::table('project_statuses')->insert([
+            'id' 		=> ProjectStatus::FINALIZADO,
+            'name'		=> 'finalizado'
+        ]);
+        DB::table('project_statuses')->insert([
+            'id' 		=> ProjectStatus::CANCELADO,
+            'name'		=> 'prospecto'
         ]);
 	}
 }

@@ -22,7 +22,11 @@
 <div id="projectModal" class="modal" ng-form="projectForm">
     <div class="modal-content">
         <h5>Nuevo Proyecto</h5>
-        <div class="input-field col s6">
+        <div class="input-field col s12">
+            <input placeholder="" id="name" type="text" class="validate" ng-model="project.name" required>
+            <label for="name">Nombre del proyecto</label>
+        </div>
+        <div class="input-field col s12">
             <input placeholder="" id="name" type="text" class="validate" ng-model="project.name" required>
             <label for="name">Nombre del proyecto</label>
         </div>
