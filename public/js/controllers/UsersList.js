@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('UsersListController', function($scope, $location, Users) {
+        .controller('UsersListController', function($scope, $location, Users, UserRoles) {
             $scope.itemsByPage = 10;
             $scope.displayedCollection = [];
             $scope.users = [];
@@ -15,6 +15,11 @@
                 });
             }
             init();
+
+            UserRoles.query(function(userRoles) {
+                $scope.userRoles = userRoles;
+                console.log($scope.userRoles);
+            });
 
             $scope.getStatus = function(status) {
                 return status ? 'Activo' : 'Cancelado';

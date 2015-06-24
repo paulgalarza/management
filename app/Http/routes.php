@@ -41,7 +41,7 @@ Route::post('projectstatuses', 'ProjectStatusController@create');
 Route::delete('projectstatuses/{id}', 'ProjectStatusController@destroy');
 
 Route::get('userroles', 'UserRoleController@load');
-Route::put('userroles/{id}', 'UserRoleController@update');
+Route::put('userroles', 'UserRoleController@update');
 Route::post('userroles', 'UserRoleController@create');
 Route::delete('userroles/{id}', 'UserRoleController@destroy');
 
