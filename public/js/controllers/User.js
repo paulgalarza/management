@@ -2,12 +2,17 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('UserController', function($scope, $routeParams, Users) {
+        .controller('UserController', function($scope, $routeParams, Users, UserRoles) {
+
             Users.get({
                 id: $routeParams.userId
             }, function(user) {
                 $scope.user = user;
                 init();
+            });
+
+            UserRoles.query(function(userRoles) {
+                $scope.userRoles = userRoles;
             });
 
             var init = function() {
