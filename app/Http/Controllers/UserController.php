@@ -15,7 +15,12 @@ class UserController extends BaseController {
     }
 
     public function create() {
-        return json_encode(parent::baseCreate(new Users));
+        $user = new User();
+        $user->name = Input::get('name');
+        $user->password = bcrypt(Input::get('password'));
+        $user->userRole_id = Input::get('userRole_id');
+        Input::get('');
+        //return json_encode(parent::baseCreate(new Users));
     }
 
      public function update() {

@@ -19,6 +19,7 @@ class UserRoleController extends BaseController {
     }
 
     public function update($id) {
+        $id = Input::get('id');
         $userRole = UserRoles::find($id);
         return json_encode(parent::baseUpdate($userRole));
     }

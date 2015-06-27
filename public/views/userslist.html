@@ -17,23 +17,35 @@
         <i class="large mdi-content-add"></i>
     </a>
 </div>
-
 <!-- Modal Structure -->
 <div id="userModal" class="modal" ng-form="userForm">
     <div class="modal-content">
         <h5>Nuevo usuario</h5>
-        <div class="input-field col s6">
-            <input placeholder="" id="name" type="text" class="validate" ng-model="user.name" required>
-            <label for="name">Nombre</label>
-        </div>
-        <div class="input-field col s6">
+        <div class="input-field col s4">
             <input placeholder="" id="name" type="text" class="validate" ng-model="user.username" required>
             <label for="name">Nombre de usuario</label>
         </div>
-        <div class="input-field col s6">
-            <input placeholder="" id="name" type="password" class="validate" ng-model="user.password" required>
+        <div class="col s4">
+            <div class="input-field">
+                <select class="browser-default" ng-model="user.userRoles_id" material-select>
+                    <option value="" disabled selected>Seleccione</option>
+                    <option ng-repeat="userRole in userRoles" value="{{userRole.id}}">
+                        {{userRole.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-field col s4">
+            <input placeholder="" id="email" type="text" class="validate" ng-model="user.email" required>
+            <label for="email">Email</label>
+        </div>
+        <div class="input-field col s4">
+            <input placeholder="" id="password" type="password" class="validate" ng-model="user.password" required>
             <label for="name">Contraseña</label>
         </div>
+        <!--<div class="input-field col s4">
+            <input placeholder="" id="repitPassword" type="password" class="validate" required>
+            <label for="name">Repetir Contraseña</label>
+        </div>-->
     </div>
     <div class="modal-footer">
         <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="userForm.$invalid">Guardar</a>
