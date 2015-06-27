@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('CustomersListController', function($scope, $location, Customers) {
+        .controller('CustomersListController', function($scope, $location, Customers, Companies) {
             $scope.itemsByPage = 10;
             $scope.displayedCollection = [];
             $scope.customers = [];
@@ -13,6 +13,8 @@
                 $scope.customers = Customers.query(function() {
                     $scope.displayedCollection = $scope.customers.slice(0);
                 });
+
+                $scope.companies = Companies.query(function(companies){});
             }
             init();
 

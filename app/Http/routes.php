@@ -26,14 +26,19 @@ Route::post('customers', 'CustomerController@create');
 Route::delete('customers/{id}', 'CustomerController@destroy');
 
 Route::get('processes', 'ProcessController@load');
-Route::put('processes/{id}', 'ProcessController@update');
+Route::put('processes', 'ProcessController@update');
 Route::post('processes', 'ProcessController@create');
 Route::delete('processes/{id}', 'ProcessController@destroy');
 
 Route::get('projects', 'ProjectController@load');
-Route::put('projects/{id}', 'ProjectController@update');
+Route::put('projects', 'ProjectController@update');
 Route::post('projects', 'ProjectController@create');
 Route::delete('projects/{id}', 'ProjectController@destroy');
+
+Route::get('projecttypes', 'ProjectTypeController@load');
+Route::put('projecttypes', 'ProjectTypeController@update');
+Route::post('projecttypes', 'ProjectTypeController@create');
+Route::delete('projecttypes/{id}', 'ProjectTypeController@destroy');
 
 Route::get('projectstatuses', 'ProjectStatusController@load');
 Route::put('projectstatuses/{id}', 'ProjectStatusController@update');

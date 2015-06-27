@@ -18,7 +18,8 @@ class ProjectController extends BaseController {
         return json_encode(parent::baseCreate(new Projects));
     }
 
-    public function update($id) {
+    public function update() {
+        $id = Input::get('id');
         $project = Projects::find($id);
         return json_encode(parent::baseUpdate($project));
     }

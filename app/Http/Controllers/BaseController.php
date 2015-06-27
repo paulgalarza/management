@@ -22,7 +22,7 @@ class BaseController extends Controller {
         }
     }
 
-    public function baseCreate($Model) {
+    public function baseCreate($Model, $params = array()) {
         $params = Input::all();
         foreach($params as $key => $value) {
             $Model[$key] = $value;    

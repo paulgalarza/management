@@ -1,71 +1,85 @@
-<div class="grid"><div class="white collapse title">
-    <span>Requerimientos</span>
-    <a class='right' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
-        <i class="material-icons">more_vert</i>
-    </a>
-</div>
-<table id="table" class="collection white bordered hoverable responsive-table">
-    <thead>
-        <tr>
-            <th>
-                <input type="checkbox" id="selectAll" />
-                <label for="selectAll"></label>
-            </th>
-            <th data-field="id">Folio</th>
-            <th data-field="name">Empresa</th>
-            <th data-field="price">Proyecto</th>
-            <th data-field="price">Estatus</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <input type="checkbox" id="test5" />
-                <label for="test5"></label>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-click="newRequirement()">
-    <a class="btn-floating btn-large red">
-        <i class="large mdi-content-add"></i>
-    </a>
-</div>
-<!-- Modal Structure -->
-<div id="requirementModal" class="modal" ng-form="customerForm">
-    <div class="modal-content">
-        <h5>Nuevo requerimiento</h5>
-        <div class="input-field col s6">
-            <input type="text" class="validate" ng-model="requirement.folio" disabled="">
-            <label>Folio</label>
+<div class="grid">
+    <div class="white collapse title">
+        <span>Requerimientos</span>
+        <a class='right' href='javascript:void(0);' data-activates='demoDropdown' dropdown data-hover="true">
+            <i class="material-icons">more_vert</i>
+        </a>
+    </div>
+    <table id="table" class="collection white bordered hoverable responsive-table">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>Folio</th>
+                <th>Proyecto</th>
+                <th>Estatus</th>
+                <th>Archivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="requirement in requirements" ng-class="{active: requirement.selected}">
+                <td>
+                    <input type="checkbox" id="{{requirement.id}}" ng-model="requirement.selected" ng-click="selectRequirement(requirement.id)" />
+                    <label for="{{requirement.id}}"></label>
+                </td>
+                <td>
+                    {{requirement.folio}}
+                </td>
+                <td>
+                    {{requirement.project.name}}
+                </td>
+                <td>
+                    {{requirement._status}}
+                </td>
+                <td>
+                    <a ng-href="requirement.file" ng-show="requirement.file">Requerimiento</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-click="new()">
+        <a class="btn-floating btn-large red">
+            <i class="large mdi-content-add"></i>
+        </a>
+    </div>
+    <!-- Modal Structure -->
+    <div id="requirementModal" class="modal" ng-form="customerForm">
+        <div class="modal-content">
+            <h5>Nuevo requerimiento</h5>
+            <div class="input-field col s6">
+                <input type="text" class="validate" ng-model="requirement.folio" readonly="">
+                <label>Folio</label>
+            </div>
+            <div class="input-field col s6">
+                <select class="browser-default" ng-model="requirement.project_id" material-select>
+                    <option value="0" disabled selected>Seleccione proyecto</option>
+                    <option ng-repeat="project in projects" value="{{project.id}}">{{project.name}}</option>
+                </select>
+            </div>
         </div>
-        <div class="input-field col s6">
-            <select class="" ng-model="requirement.company_id" material-select>
-                <option value="" disabled selected>Seleccione</option>
-                <option ng-repeat="company in companies" value="{{company.id}}">{{company.name}}</option>
-            </select>
-            <label>Empresa</label>
-        </div>
-        <div class="input-field col s6">
-            <select class="" ng-model="requirement.project_id" material-select>
-                <option value="" disabled selected>Seleccione</option>
-                <option ng-repeat="project in projects" value="{{project.id}}">{{project.name}}</option>
-            </select>
-            <label>Empresa</label>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="customerForm.$invalid">Guardar</a>
         </div>
     </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="customerForm.$invalid">Guardar</a>
+    <!-- Modal Attach -->
+    <div id="attachModal" class="modal" ng-form="customerForm">
+        <div class="modal-content">
+            <h5>Adjuntar</h5>
+            <div class="input-field col s6">
+                <input type="file" class="validate" ng-model="requirement.folio" readonly="">
+                <label>Archivo</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="customerForm.$invalid">Guardar</a>
+        </div>
     </div>
-</div>
-<!-- Dropdown Structure -->
-<ul id='demoDropdown' class='dropdown-content'>
-    <li><a>Imprimir</a></li>
-    <li><a>Aprobar</a></li>
-    <li><a>Eliminar</a></li>
-</ul>
+    <!-- Dropdown Structure -->
+    <ul id='demoDropdown' class='dropdown-content'>
+        <li ng-show="selected.file"><a ng-click="print()">Imprimir</a></li>
+        <li ng-show="selected.status == 1"><a ng-click="approve()">Aprobar</a></li>
+        <li ng-show="selected.status == 2"><a ng-click="cancel()">Cancelar</a></li>
+        <li><a ng-click="attach()">Adjuntar</a></li>
+        <li><a ng-click="delete()">Eliminar</a></li>
+    </ul>
 </div>

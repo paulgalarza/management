@@ -2,16 +2,12 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('ProjectsListController', function($scope, $location, Projects) {
-            $scope.itemsByPage = 10;
-            $scope.displayedCollection = [];
+        .controller('ProjectsListController', function($scope, $location, Projects, ProjectTypes, Customers) {
             $scope.projects = [];
-            $scope.selected = '';
-
             var init = function() {
-                $scope.projects = Projects.query(function() {
-                    $scope.displayedCollection = $scope.projects.slice(0);
-                });
+                $scope.projects = Projects.query();                
+                $scope.customers = Customers.query();
+                $scope.projectTypes = ProjectTypes.query();
             }
             init();
 
@@ -19,17 +15,13 @@
                 return status ? 'Activo' : 'Cancelado';
             };
 
-            $scope.select = function(id) {
-                $scope.selected = id;
-            };
-
             $scope.newProject = function() {
                 $('#projectModal').openModal();
             }
 
-            $scope.save = function() {
+            $scope.save = function() {                                
                 Projects.save($scope.project, function(project) {
-                    $location.path('/proyectos/' + project.id);
+                    $location.path('/proyecto/' + project.id);
                 });
             }
         });

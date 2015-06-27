@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UserRoles');
 		$this->call('UserTableSeeder');
         $this->call('ProjectStatusSeeder');
+        $this->call('RequirementsStatus');
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 }	
@@ -65,5 +66,19 @@ class ProjectStatusSeeder extends Seeder {
             'name'		=> 'prospecto'
         ]);
 	}
+}
+
+class RequirementsStatus extends Seeder {
+    public function run(){
+        DB::table('Requirements_status')->truncate();
+        DB::table('Requirements_status')->insert([
+            'id'        => 1,
+            'name'      => 'Prospecto'
+        ]);
+        DB::table('Requirements_status')->insert([
+            'id'        => 2,
+            'name'      => 'Aceptado'
+        ]);
+    }
 }
 

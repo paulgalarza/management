@@ -78,20 +78,30 @@
  table th i {
      display: none;
  }
+ table tr.active{
+     background-color: #f2f2f2;
+ }
  
  tr th:first-child {
      width: 20px;
  }
- .modal{
+ 
+ .modal {
      width: 600px !important;
+ }
+ 
+ .modal h5 {
+     margin-bottom: 25px;
  }
  
  #table {
      margin-top: 0px;
  }
- #requirementModal{
+ 
+ #requirementModal {
      height: 400px;
  }
+ 
  .grid .title {
      border: 1px solid #e0e0e0;
      border-bottom: 0px;

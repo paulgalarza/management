@@ -18,14 +18,10 @@ class CreateRequirementsTable extends Migration {
 			$table->increments('id');
 			$table->string('folio')->nullable()->default('');
 			$table->integer('project_id')->nullable()->unsigned()->default(0);
-			$table->integer('company_id')->nullable()->unsigned()->default(0);
 			$table->string('file')->nullable()->default('');
 			$table->integer('status')->nullable()->default(1);
 			$table->foreign('project_id')
       			->references('id')->on('projects')
-      			->onDelete('cascade');
-      		$table->foreign('company_id')
-      			->references('id')->on('companies')
       			->onDelete('cascade');
 			$table->timestamps();
 		});

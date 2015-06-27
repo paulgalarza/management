@@ -8,7 +8,7 @@
                     <br> {{project.projectStatus}}
                 </p>
             </div>
-            <a href="#proyectos/{{project.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
+            <a href="#proyecto/{{project.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
         </li>
     </ul>
 </div>
@@ -17,18 +17,25 @@
         <i class="large mdi-content-add"></i>
     </a>
 </div>
-
 <!-- Modal Structure -->
-<div id="projectModal" class="modal" ng-form="projectForm">
+<div id="projectModal" class="modal modal-fixed-footer" ng-form="projectForm">
     <div class="modal-content">
         <h5>Nuevo Proyecto</h5>
         <div class="input-field col s12">
             <input placeholder="" id="name" type="text" class="validate" ng-model="project.name" required>
             <label for="name">Nombre del proyecto</label>
         </div>
-        <div class="input-field col s12">
-            <input placeholder="" id="name" type="text" class="validate" ng-model="project.name" required>
-            <label for="name">Nombre del proyecto</label>
+        <div class="input-field col s6">
+            <select class="browser-default" ng-model="project.project_type" material-select>
+                <option value="" disabled selected>Seleccione tipo de proyecto</option>
+                <option ng-repeat="projectType in projectTypes" value="{{projectType.id}}">{{projectType.name}}</option>
+            </select>
+        </div>
+        <div class="input-field col s6">
+            <select class="browser-default" ng-model="project.customer_id" material-select>
+                <option value="" disabled selected>Seleccione cliente</option>
+                <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">

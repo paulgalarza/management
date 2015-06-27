@@ -1,0 +1,77 @@
+<div>
+    <div class="row">
+        <div class=" ">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active cyan-text text-darken-1" href="#datos">Datos</a></li>
+                <li class="tab col s3"><a class="cyan-text text-darken-1" href="#test2">Procesos</a></li>
+                <li class="tab col s3"><a class="cyan-text text-darken-1" href="#test3">Tareas</a></li>
+                <li class="tab col s3"><a class="cyan-text text-darken-1" href="#test4">Equipo</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row collection white form">
+        <form name="customer">
+            <div class="row header">
+                <div class="col s12">
+                    <a class="waves-effect waves-light btn right" ng-click="save()">Guardar</a>
+                    <a href="#proyectos" class="waves-effect waves-green btn-flat right">Regresar</a>
+                </div>
+            </div>
+            <div id="datos">
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Nombre: </label>
+                    </div>
+                    <div class="col s7" input-field>
+                        <input ng-model="project.name" id="name" type="text" class="validate" required length="255">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Descripcion: </label>
+                    </div>
+                    <div class="col s7" input-field>
+                        <textarea ng-model="project.description" class="materialize-textarea" length="255"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Inicio: </label>
+                    </div>
+                    <div class="col s7" input-field>
+                        <input input-date type="text" ng-model="project.start" today="hoy" clear="limpiar" close="cerrar">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Final: </label>
+                    </div>
+                    <div class="col s7" input-field>
+                        <input input-date type="text" ng-model="project.end" today="hoy" clear="limpiar" close="cerrar">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Costo: </label>
+                    </div>
+                    <div class="col s7" input-field>
+                        <input type="text" ng-model="project.cost">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s3">
+                        <label for="name">Clientes: </label>
+                    </div>
+                    <div class="col s7">
+                        <select class="browser-default" ng-model="project.customer_id" material-select>                            
+                            <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="test2" class="col s12">Test 2</div>
+            <div id="test3" class="col s12">Test 3</div>
+            <div id="test4" class="col s12">Test 4</div>
+        </form>
+    </div>
+</div>

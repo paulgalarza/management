@@ -19,6 +19,10 @@
                     templateUrl: 'views/projectslist.html',
                     controller: 'ProjectsListController'
                 })
+                .when('/proyecto/:projectId', {
+                    templateUrl: 'views/project.html',
+                    controller: 'ProjectController'
+                })
                 .when('/empresas', {
                     templateUrl: 'views/companieslist.html',
                     controller: 'CompaniesListController'
@@ -51,6 +55,14 @@
                     templateUrl: 'views/requirementslist.html',
                     controller: 'RequirementsListController'
                 })
+                .when('/tiposproyectos', {
+                    templateUrl: 'views/projecttypeslist.html',
+                    controller: 'ProjectTypesListController'
+                })
+                .when('/tipoproyecto/:projectTypeId', {
+                    templateUrl: 'views/projecttype.html',
+                    controller: 'ProjectTypeController'
+                })
                 .otherwise({
                     templateUrl: 'views/404.html'
                 })
@@ -64,6 +76,9 @@
             }, {
                 str: 'Proyectos',
                 url: 'views/projectslist.html'
+            }, {
+                str: 'Proyecto',
+                url: 'views/project.html'
             }, {
                 str: 'Empresas',
                 url: 'views/companieslist.html'
@@ -91,6 +106,12 @@
             }, {
                 str: 'Requerimientos',
                 url: 'views/requirementslist.html'
+            }, {
+                str: 'Tipos de proyecto',
+                url: 'views/projecttypeslist.html'
+            }, {
+                str: 'Tipos de proyecto',
+                url: 'views/projecttype.html'
             }];
 
             $rootScope.$on('$routeChangeStart', function(event, next) {

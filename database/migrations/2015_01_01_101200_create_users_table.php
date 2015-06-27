@@ -20,12 +20,16 @@ class CreateUsersTable extends Migration {
 			$table->string('username')->unique()->default('');
 			$table->string('email')->unique()->default('');
 			$table->string('password', 60)->default('');
-			$table->string('address')->default('')->default('');
-			$table->string('phone')->default('')->default('');
+			$table->string('address')->default('');
+			$table->string('phone')->default('');
 			$table->boolean('status')->default(true);
 			$table->integer('userRoles_id')->unsigned()->nullable()->default(0);
+			$table->integer('project_id')->unsigned()->nullable()->default(0);
 			$table->foreign('userRoles_id')
       			->references('id')->on('user_roles')
+      			->onDelete('cascade');
+      		$table->foreign('project_id')
+      			->references('id')->on('projects')
       			->onDelete('cascade');
 			$table->rememberToken();
 			$table->timestamps();
