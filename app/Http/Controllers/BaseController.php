@@ -41,12 +41,6 @@ class BaseController extends Controller {
         return $Model;
     }
 
-    public function destroy($id) {
-        $customers = Customer::find($id);
-        $cliente->delete();
-        
-    }
-
     private function isValidKey($key){
         return $key !== 'updated_at'  && $key !== 'created_at';
     }

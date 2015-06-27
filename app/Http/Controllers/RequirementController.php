@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Requirement;
 use Input;
+use App;
 
 class RequirementController extends BaseController {
 
@@ -20,14 +21,22 @@ class RequirementController extends BaseController {
 
     public function update() {
         $id = Input::get('id');
-        $customer = Requirement::find($id);
-        return json_encode(parent::baseUpdate($customer));
+        $requirement = Requirement::find($id);
+        return json_encode(parent::baseUpdate($requirement));
     }
 
-    public function destroy($id) {
-        $customer = Requirement::find($id);
-        $customer->delete();
+    public function destroy() {
+        $id = Input::get('id');
         return json_encode($id);
+        $requirement = Requirement::find($id);
+        $requirement->delete();
+        return json_encode($id);
+    }
+
+    public function printPdf(){
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
     }
 
 }

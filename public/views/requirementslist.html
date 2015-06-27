@@ -65,9 +65,12 @@
     <div id="attachModal" class="modal" ng-form="customerForm">
         <div class="modal-content">
             <h5>Adjuntar</h5>
-            <div class="input-field col s6">
-                <input type="file" class="validate" ng-model="requirement.folio" readonly="">
-                <label>Archivo</label>
+            <div class="col s6 file-field input-field">
+                <input class="file-path validate" type="text" readonly="" />
+                <div class="btn">
+                    <span>File</span>
+                    <input type="file" />
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -76,7 +79,7 @@
     </div>
     <!-- Dropdown Structure -->
     <ul id='demoDropdown' class='dropdown-content'>
-        <li ng-show="selected.file"><a ng-click="print()">Imprimir</a></li>
+        <li ng-show="selected.status == 1"><a ng-click="print()">Imprimir</a></li>
         <li ng-show="selected.status == 1"><a ng-click="approve()">Aprobar</a></li>
         <li ng-show="selected.status == 2"><a ng-click="cancel()">Cancelar</a></li>
         <li><a ng-click="attach()">Adjuntar</a></li>

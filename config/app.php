@@ -195,4 +195,5 @@ return [
 
 	],
 
+	'Barryvdh\DomPDF\ServiceProvider',
 ];
