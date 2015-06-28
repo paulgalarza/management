@@ -14,7 +14,7 @@
             </a>
             <!-- Dropdown Structure -->
             <ul id='dropDown-{{company.id}}' class='dropdown-content'>
-                <li><a ng-click="removeCompany(company)">Eliminar</a></li>
+                <li><a ng-click="delete(company)">Eliminar</a></li>
             </ul>
         </li>
     </ul>
@@ -25,15 +25,18 @@
     </a>
 </div>
 <!-- Modal Structure -->
-<div id="companyModal" class="modal" ng-form="companyForm">
+<div id="companyModal" class="modal" ng-form="companyForm" ng-class="error" novalidate>
     <div class="modal-content">
         <h5>Nueva empresa</h5>
         <div class="input-field col s6">
-            <input placeholder="" id="name" type="text" class="validate" ng-model="company.name" required>
+            <input placeholder="" id="name" type="text" ng-model="company.name" required>
             <label for="name">Nombre de la empresa</label>
+        </div>
+        <div class="red-text" style="margin-top: 15px;" ng-show="error && companyForm.$invalid">
+            <span>Los campos son obligatorios</span>
         </div>
     </div>
     <div class="modal-footer">
-        <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="companyForm.$invalid">Guardar</a>
+        <a class="waves-effect waves-light btn" ng-click="save()" ng-disabled="companyForm.$invalid">Guardar</a>
     </div>
 </div>

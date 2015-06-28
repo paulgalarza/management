@@ -24,9 +24,12 @@ class CompanyController extends BaseController {
         return json_encode(parent::baseUpdate($company));
     }
 
-    public function destroy($id) {
+    public function destroy() {
+        $id = Input::get('id');
         $company = Companies::find($id);
-        $company->delete();
+        if(is_object($company)){
+            $company->delete();    
+        }
         return json_encode($id);
     }
 
