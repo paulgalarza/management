@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="customerForm.$invalid">Guardar</a>
+            <a class="waves-effect waves-light btn" data-ng-click="save()">Guardar</a>
         </div>
     </div>
     <!-- Modal Attach -->
@@ -82,7 +82,7 @@
         <li ng-show="selected.status == 1"><a ng-click="print()">Imprimir</a></li>
         <li ng-show="selected.status == 1"><a ng-click="approve()">Aprobar</a></li>
         <li ng-show="selected.status == 2"><a ng-click="cancel()">Cancelar</a></li>
-        <li><a ng-click="attach()">Adjuntar</a></li>
-        <li><a ng-click="delete()">Eliminar</a></li>
+        <li ng-show="selected"><a ng-click="attach()" href="javascript:void(0)">Adjuntar</a></li>
+        <li ng-show="selected"><a ng-click="delete()">Eliminar</a></li>
     </ul>
 </div>
