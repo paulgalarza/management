@@ -26,10 +26,12 @@
             };
 
             $scope.save = function() {
+                console.log($scope.requirement);
                 Requirements.save($scope.requirement, function(requirement) {
                     init();
                 });
-            }
+                $('#attachModal').closeModal();
+            };
 
             $scope.lastFolio = function() {
                 var last = 0;
@@ -37,7 +39,7 @@
                     last = parseInt(requirement.folio) > last ? parseInt(requirement.folio) : last;
                 });
                 return last + 1;
-            }
+            };
 
             $scope.selectRequirement = function(requirementId) {
                 _.each($scope.requirements, function(requirement) {
@@ -47,33 +49,49 @@
                         $scope.selected = requirement;
                     }
                 });
-            }
+            };
 
             $scope.approve = function() {
                 $scope.selected.status = 2;
                 $scope.selected.$update(function() {
                     init();
                 });
-            }
+            };
 
             $scope.cancel = function() {
                 $scope.selected.status = 1;
                 $scope.selected.$update(function() {
                     init();
                 });
-            }
+            };
 
             $scope.attach = function() {
                 $('#attachModal').openModal();
-            }
+            };
 
             $scope.delete = function() {
-                $scope.selected.$delete();
-                init();
-            }
+                swal({
+                    title: "¿Esta seguo?",
+                    text: "El requerimiento no podra ser recuperado!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, eliminar!",
+                    cancelButtonText: "No, cancelar",
+                    closeOnConfirm: false
+                }, function() {
+                    $scope.selected.$delete({
+                        id: $scope.selected.id
+                    }, function() {
+                        init();
+                        swal("Eliminado!", "El requerimiento a sido eliminado con exito.", "success");
+                    });
+
+                });
+            };
 
             $scope.print = function() {
-                
+                console.log('print');
             }
         });
 })();

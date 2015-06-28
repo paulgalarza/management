@@ -27,9 +27,10 @@ class RequirementController extends BaseController {
 
     public function destroy() {
         $id = Input::get('id');
-        return json_encode($id);
         $requirement = Requirement::find($id);
-        $requirement->delete();
+        if(is_object($requirement)){
+            $requirement->delete();    
+        }
         return json_encode($id);
     }
 

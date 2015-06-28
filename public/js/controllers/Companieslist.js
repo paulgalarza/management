@@ -13,20 +13,20 @@
                 $scope.companies = Companies.query(function() {
                     $scope.displayedCollection = $scope.companies.slice(0);
                 });
-            };
+            }
             init();
 
             $scope.getStatus = function(status) {
                 return status ? 'Activo' : 'Cancelado';
-            };
+            }
 
             $scope.select = function(id) {
                 $scope.selected = id;
-            };
+            }
 
             $scope.newCompany = function() {
                 $('#companyModal').openModal();
-            };
+            }
 
             $scope.save = function() {
                 Companies.save($scope.company, function(company) {
@@ -60,5 +60,6 @@
                     $location.path('/views/companieslist.html/');
                 });
             };
+
         });
 })();
