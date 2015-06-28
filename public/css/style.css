@@ -174,3 +174,7 @@
  .has-error .ng-invalid {
      border-color: #f44334;
  }
+
+ .password-error .ng-invalid {
+     border-color: #f44334;
+ }
