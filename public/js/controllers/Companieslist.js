@@ -30,7 +30,7 @@
 
             $scope.save = function() {
                 Companies.save($scope.company, function(company) {
-                	$location.path('/empresas/'+company.id);
+                    $location.path('/empresas/' + company.id);
                 });
             };
 
@@ -54,6 +54,5 @@
 
                 });
             };
-
         });
 })();

@@ -26,11 +26,10 @@
             };
 
             $scope.save = function() {
-                console.log($scope.requirement);
+                $('#requirementModal').closeModal();
                 Requirements.save($scope.requirement, function(requirement) {
                     init();
                 });
-                $('#attachModal').closeModal();
             };
 
             $scope.lastFolio = function() {

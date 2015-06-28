@@ -9,6 +9,10 @@
      flex: 1 0 auto;
  }
  
+ .header {
+     padding: 20px;
+ }
+ 
  .login .header {
      text-align: center;
      margin-top: 20px;
@@ -78,7 +82,8 @@
  table th i {
      display: none;
  }
- table tr.active{
+ 
+ table tr.active {
      background-color: #f2f2f2;
  }
  
@@ -160,4 +165,17 @@
  
  .form .input-field {
      margin-top: 0px;
+ }
+ 
+ .ng-invalid.ng-dirty {
+     border-color: red;
+ }
+ 
+ .has-error .ng-invalid {
+     border-color: #f44334;
+ }
+ .error-text{
+     display: none;
+ }
+
  }
