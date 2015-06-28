@@ -25,7 +25,7 @@
     </a>
 </div>
 <!-- Modal Structure -->
-<div id="customerModal" class="modal" ng-form="customerForm" novalidate>
+<div id="customerModal" class="modal" ng-form="customerForm" ng-class="error" novalidate>
     <div class="modal-content">
         <h5>Nuevo Cliente</h5>
         <div class="input-field col s6">
@@ -33,16 +33,16 @@
             <label for="name">Nombrel cliente</label>
         </div>
         <div class="input-field col s6">
-            <select name="company" class="browser-default" ng-model="customer.company_id" material-select>
+            <select name="company" class="browser-default" ng-model="customer.company_id" material-select required>
                 <option value="" disabled selected>Seleccione empresa</option>
                 <option ng-repeat="company in companies" value="{{company.id}}">{{company.name}}</option>
             </select>
         </div>
-        <div class="red-text" style="margin-top: 15px;">
-            <span data-ng-if="(customerForm.company.$invalid || customerForm.name.$invalid) && customerForm.$dirty ">Los campos son obligatorios</span>
+        <div class="red-text" style="margin-top: 15px;" ng-show="error && customerForm.$invalid">
+            <span>Los campos son obligatorios</span>
         </div>
     </div>
     <div class="modal-footer">
-        <a class="waves-effect waves-light btn" ng-click="save()" ng-disabled="!customerForm.$valid">Guardar</a>
+        <a class="waves-effect waves-light btn" ng-click="save()">Guardar</a>
     </div>
 </div>

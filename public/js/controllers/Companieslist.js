@@ -29,9 +29,15 @@
             }
 
             $scope.save = function() {
-                Companies.save($scope.company, function(company) {
-                    $location.path('/empresas/' + company.id);
-                });
+                $scope.error = 'has-error';
+                if ($scope.companyForm.$valid) {
+                    $('#companyModal').closeModal();
+                    $scope.error = '';
+                    Companies.save($scope.company, function(company) {
+                        $location.path('/empresas/' + company.id);
+                    });
+                }
+
             };
 
             $scope.delete = function(company) {

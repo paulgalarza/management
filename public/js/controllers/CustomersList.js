@@ -16,7 +16,7 @@
 
                 $scope.companies = Companies.query(function(companies) {});
             };
-            
+
             init();
 
             $scope.getStatus = function(status) {
@@ -32,9 +32,14 @@
             }
 
             $scope.save = function() {
-                Customers.save($scope.customer, function(customer) {
-                    $location.path('/clientes/' + customer.id);
-                });
+                $scope.error = 'has-error';
+                if ($scope.customerForm.$valid) {
+                    $('#customerModal').closeModal();
+                    $scope.error = '';
+                    Customers.save($scope.customer, function(customer) {
+                        $location.path('/clientes/' + customer.id);
+                    });
+                }
             };
 
             $scope.delete = function(customer) {

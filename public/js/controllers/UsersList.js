@@ -33,9 +33,36 @@
             };
 
             $scope.save = function() {
-                Users.save($scope.user, function(user) {
-                    $location.path('/usuarios/' + user.id);
+                $scope.error = 'has-error';
+                if ($scope.userForm.$valid) {
+                    $('#userForm').closeModal();
+                    $scope.error = '';
+                    Users.save($scope.user, function(user) {
+                        $location.path('/usuarios/' + user.id);
+                    });
+                }
+            };
+
+            $scope.delete = function(user) {
+                swal({
+                    title: "¿Esta seguro?",
+                    text: "El usuario no podrá ser recuperado!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, eliminar!",
+                    cancelButtonText: "No, cancelar",
+                    closeOnConfirm: false
+                }, function() {
+                    user.$delete({
+                        id: user.id
+                    }, function() {
+                        init();
+                        swal("Eliminado!", "El usuario ha sido eliminado con exito.", "success");
+                    });
+
                 });
             };
+
         });
 })();
