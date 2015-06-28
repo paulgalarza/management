@@ -15,12 +15,14 @@ class UserController extends BaseController {
     }
 
     public function create() {
-        $user = new User();
-        $user->name = Input::get('name');
+        $user = new Users();
+        $user->username = Input::get('username');
+        $user->email = Input::get('email');
+        $user->userRoles_id = Input::get('userRoles_id');
         $user->password = bcrypt(Input::get('password'));
-        $user->userRole_id = Input::get('userRole_id');
+        $user->project_id = null;
+        $user->save();
         return json_encode($user);
-        //return json_encode(parent::baseCreate(new Users));
     }
 
      public function update() {

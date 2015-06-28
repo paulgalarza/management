@@ -65,30 +65,18 @@
             </div>
         </div>
     </div>
-    <ul ng-show="selectedTab === 2" class="collapsible" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+    <ul ng-show="selectedTab === 2" class="collapsible popout" data-collapsible="accordion">
+        <li ng-repeat="process in processes">
+            <div class="collapsible-header">{{process.name}}</div>
             <div class="collapsible-body">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-            <div class="collapsible-body">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-            <div class="collapsible-body">
-                <p>Lorem ipsum dolor sit amet.</p>
+                <p>{{process.name}}</p>
             </div>
         </li>
     </ul>
     <div ng-show="selectedTab === 3" class="col s12">Test 3</div>
     <div ng-show="selectedTab === 4" class="col s12">Test 4</div>
 </form>
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;" ng-click="new(selectedTab)">
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a ng-show="selectedTab === 1" class="btn-floating btn-large red">
         <i class="large mdi-content-add"></i>
     </a>
@@ -97,7 +85,7 @@
     </a>
 </div>
 <!-- Modal Structure -->
-<div id="processModal" class="modal" ng-form="processForm" ng-class="error">
+<div id="processModal" class="modal" ng-form="processForm" ng-class="processError">
     <div class="modal-content">
         <h5>Nuevo proceso</h5>
         <div class="row">
@@ -117,12 +105,12 @@
             </div>
         </div>
         <div class="input-field col s6">
-            <select class="browser-default" ng-model="process.requirement_id" material-select required>
+            <select class="browser-default" ng-model="process.requirement_id" material-select>
                 <option value="0" disabled selected>Seleccione un requerimiento</option>
                 <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
             </select>
         </div>
-        <div ng-show="error">
+        <div ng-show="processError">
             <span class="red-text">Favor de llenar los campos obligatorios</span>
         </div>
     </div>

@@ -8,17 +8,21 @@
             }, function(project) {
                 $scope.project = project;
                 init();
+                initProcess();
             });
 
             var init = function() {
                 $scope.selectedTab = 1;
                 $scope.customers = Customers.query();
                 $scope.project._status = $scope.project.status && true;
+            };
+
+            var initProcess = function() {
+                $scope.processes = Processes.query();
                 $scope.process = {
                     requirement_id: 0
                 };
-
-            }
+            };
 
             $scope.save = function() {
                 $scope.project.status = $scope.project._status ? 1 : 0;
@@ -28,29 +32,22 @@
                 });
             };
 
-            $scope.selectTab = function(tab){
+            $scope.selectTab = function(tab) {
                 $scope.selectedTab = tab;
             }
 
-            $scope.new = function(){
-                switch(tab){
-                    case 2:
-                        $('#processModal').openModal();
-                        break;
-                }
-            };
-
-            $scope.newProcess = function(){
+            $scope.newProcess = function() {
                 $('#processModal').openModal();
             };
 
-            $scope.saveProcess = function(process){
-                $scope.error = 'has-error';
-                if($scope.processForm.$valid){
-                    $('#processModal').closeModal();    
-                    $scope.error = '';
-                    Processes.$save(process, function(process){
-                        //initProcess();
+            $scope.saveProcess = function(process) {
+                $scope.processError = 'has-error';
+                if ($scope.processForm.$valid) {
+                    $('#processModal').closeModal();
+                    $scope.processError = '';
+                    process.project_id = $scope.project.id;
+                    Processes.save(process, function(process) {
+                        initProcess();
                     });
                 }
             };
