@@ -24,9 +24,12 @@ class CustomerController extends BaseController {
         return json_encode(parent::baseUpdate($customer));
     }
 
-    public function destroy($id) {
+    public function destroy() {
+        $id = Input::get('id');
         $customer = Customers::find($id);
-        $customer->delete();
+        if(is_object($customer)){
+            $customer->delete();    
+        }
         return json_encode($id);
     }
 

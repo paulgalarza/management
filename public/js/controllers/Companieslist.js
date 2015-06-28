@@ -34,30 +34,24 @@
                 });
             };
 
-            $scope.removeCompany = function(company) {
+            $scope.delete = function(company) {
                 swal({
-                    title: '¿Estás seguro de elimar la empresa?',
-                    text: 'Si la eliminas, no podrás recuperar esta empresa!',
-                    type: 'warning',
+                    title: "¿Esta seguro?",
+                    text: "La empresa no podrá ser recuperada!",
+                    type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Sí, Elimínala!',
-                    cancelButtonText: 'No, cancelar',
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                }, function(isConfirm) {
-                    if (isConfirm) {
-                        swal('Eliminado!', 'Tu empresa fue eliminada', 'success');
-                        remove(company);
-                    } else {
-                        swal('Cancelado', 'Ha sido cancelado', 'error');
-                    }
-                });
-            };
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, eliminar!",
+                    cancelButtonText: "No, cancelar",
+                    closeOnConfirm: false
+                }, function() {
+                    company.$delete({
+                        id: company.id
+                    }, function() {
+                        init();
+                        swal("Eliminada!", "La empresa ha sido eliminada con exito.", "success");
+                    });
 
-            var remove = function(company) {
-                company.$delete(function(company) {
-                    $location.path('/views/companieslist.html/');
                 });
             };
 
