@@ -31,9 +31,12 @@ class UserController extends BaseController {
         return json_encode(parent::baseUpdate($user));
     }
 
-    public function destroy($id) {
+    public function destroy() {
+        $id = Input::get('id');
         $user = Users::find($id);
-        $user->delete();
+        if(is_object($user)){
+            $user->delete();    
+        }
         return json_encode($id);
     }
 
