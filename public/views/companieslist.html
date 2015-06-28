@@ -1,5 +1,5 @@
 <div ng-hide="formEmpresas">
-    <ul class="collection">
+    <ul class="collection" style="overflow: inherit;">
         <li class="collection-item avatar" ng-repeat="company in companies">
             <img class="circle" src="//g-design.storage.googleapis.com/production/v3/assets/Tools_Devices_Tool_Avatar__FFF075-1c0a9bc1.svg" style="background-color: #fff075;width:60px;height:60px;">
             <div style="margin-left:20px;">
@@ -8,7 +8,14 @@
                     <br> {{company.RFC}}
                 </p>
             </div>
-            <a href="#empresas/{{company.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
+            <a href="#empresas/{{company.id}}" class="secondary-content blue-grey-text text-lighten-3" style="top: 12px;right: 45px;"><i class="material-icons" style="font-size:30px;-webkit-transform: scaleX(-1);">reply</i></a>
+            <a class="right secondary-content blue-grey-text text-lighten-3" href="javascript:void(0);" data-activates="dropDown-{{company.id}}" dropdown data-hover="true">
+                <i class="material-icons">more_vert</i>
+            </a>
+            <!-- Dropdown Structure -->
+            <ul id='dropDown-{{company.id}}' class='dropdown-content'>
+                <li><a ng-click="removeCompany(company)">Eliminar</a></li>
+            </ul>
         </li>
     </ul>
 </div>
@@ -17,7 +24,6 @@
         <i class="large mdi-content-add"></i>
     </a>
 </div>
-
 <!-- Modal Structure -->
 <div id="companyModal" class="modal" ng-form="companyForm">
     <div class="modal-content">
