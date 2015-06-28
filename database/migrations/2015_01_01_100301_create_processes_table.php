@@ -20,6 +20,7 @@ class CreateProcessesTable extends Migration {
 			$table->dateTime('start')->nullable()->default(date("Y-m-d H:i:s"));
 			$table->dateTime('end')->nullable()->default(date("Y-m-d H:i:s"));
 			$table->integer('project_id')->unsigned()->nullable()->default(0);
+			$table->integer('requirement_id')->unsigned()->nullable()->default(0);
 			$table->foreign('project_id')
       			->references('id')->on('projects')
       			->onDelete('cascade');
