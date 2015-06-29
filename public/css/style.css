@@ -174,3 +174,6 @@
  .has-error .ng-invalid {
      border-color: #f44334;
  }
+ .collapsible-body{
+     padding: 45px;
+ }
