@@ -44,8 +44,8 @@
                 <label for="password">Contraseña</label>
             </div>
             <div class="input-field col s6">
-                <input placeholder="" id="repitPassword" type="password" ng-model="user.repitPassword" required>
-                <label for="repitPassword">Repetir Contraseña</label>
+                <input placeholder="" id="repitPassword" type="password" ng-model="user.repeatPassword" required>
+                <label for="repeatPassword">Repetir Contraseña</label>
             </div>
         </div>
         <div class="col s4">
@@ -59,6 +59,9 @@
         </div>
         <div class="red-text" style="margin-top: 15px;" ng-show="error && userForm.$invalid">
             <span>Los campos son obligatorios</span>
+        </div>
+        <div class="red-text" style="margin-top: 15px;" ng-show="incorrectPassword">
+            <span>Las contraseñas son diferentes</span>
         </div>
     </div>
     <div class="modal-footer">

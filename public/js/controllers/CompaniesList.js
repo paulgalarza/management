@@ -29,9 +29,36 @@
             }
 
             $scope.save = function() {
-                Companies.save($scope.company, function(company) {
-                	$location.path('/empresas/'+company.id);
+                $scope.error = 'has-error';
+                if ($scope.companyForm.$valid) {
+                    $('#companyModal').closeModal();
+                    $scope.error = '';
+                    Companies.save($scope.company, function(company) {
+                        $location.path('/empresas/' + company.id);
+                    });
+                }
+
+            };
+
+            $scope.delete = function(company) {
+                swal({
+                    title: "¿Esta seguro?",
+                    text: "La empresa no podrá ser recuperada!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, eliminar!",
+                    cancelButtonText: "No, cancelar",
+                    closeOnConfirm: false
+                }, function() {
+                    company.$delete({
+                        id: company.id
+                    }, function() {
+                        init();
+                        swal("Eliminada!", "La empresa ha sido eliminada con exito.", "success");
+                    });
+
                 });
-            }
+            };
         });
 })();

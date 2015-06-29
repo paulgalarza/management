@@ -32,14 +32,22 @@
                 $('#userModal').openModal();
             };
 
+            $scope.validPassword = function() {
+                return $scope.user.password === $scope.user.repeatPassword && $scope.user.password != '';
+            };
+
             $scope.save = function() {
-                $scope.error = 'has-error';
-                if ($scope.userForm.$valid) {
-                    $('#userForm').closeModal();
-                    $scope.error = '';
-                    Users.save($scope.user, function(user) {
-                        $location.path('/usuarios/' + user.id);
-                    });
+                if ($scope.validPassword()) {
+                    $scope.error = 'has-error';
+                    if ($scope.userForm.$valid) {
+                        $('#userForm').closeModal();
+                        $scope.error = '';
+                        Users.save($scope.user, function(user) {
+                            $location.path('/usuarios/' + user.id);
+                        });
+                    }
+                } else {
+                    $scope.incorrectPassword = 'password-error';
                 }
             };
 
