@@ -23,9 +23,12 @@ class ProjectStatusController extends BaseController {
         return json_encode(parent::baseUpdate($projectStatus));
     }
 
-    public function destroy($id) {
+    public function destroy() {
+        $id = Input::get('id');
         $projectStatus = ProjectStatus::find($id);
-        $projectStatus->delete();
+        if(is_object($projectStatus)){
+            $projectStatus->delete();    
+        }
         return json_encode($id);
     }
 

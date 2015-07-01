@@ -20,13 +20,16 @@ class ProjectTypeController extends BaseController {
 
     public function update() {
         $id = Input::get('id');
-        $customer = ProjectTypes::find($id);
-        return json_encode(parent::baseUpdate($customer));
+        $projectType = ProjectTypes::find($id);
+        return json_encode(parent::baseUpdate($projectType));
     }
 
-    public function destroy($id) {
-        $customer = ProjectTypes::find($id);
-        $customer->delete();
+    public function destroy() {
+        $id = Input::get('id');
+        $projectType = ProjectTypes::find($id);
+        if(is_object($projectType)){
+            $projectType->delete();    
+        }
         return json_encode($id);
     }
 

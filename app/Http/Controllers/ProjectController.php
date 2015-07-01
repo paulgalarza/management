@@ -24,9 +24,12 @@ class ProjectController extends BaseController {
         return json_encode(parent::baseUpdate($project));
     }
 
-    public function destroy($id) {
+    public function destroy() {
+        $id = Input::get('id');
         $project = Projects::find($id);
-        $project->delete();
+        if(is_object($project)){
+            $project->delete();    
+        }
         return json_encode($id);
     }
 

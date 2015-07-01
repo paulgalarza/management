@@ -1,5 +1,5 @@
 <div ng-hide="formProyectos">
-    <ul class="collection">
+    <ul class="collection" style="overflow: inherit;">
         <li class="collection-item avatar" ng-repeat="project in projects">
             <img class="circle" src="//g-design.storage.googleapis.com/production/v3/assets/design_producer_00bea4-1776968e.svg" style="background-color: #00bea4;width:60px;height:60px;">
             <div style="margin-left:20px;">
@@ -8,7 +8,14 @@
                     <br> {{project.projectStatus}}
                 </p>
             </div>
-            <a href="#proyecto/{{project.id}}" class="secondary-content" style="font-size:30px;"><i class="mdi-action-exit-to-app"></i></a>
+            <a href="#proyecto/{{project.id}}" class="secondary-content blue-grey-text text-lighten-3" style="top: 12px;right: 45px;"><i class="material-icons" style="font-size:30px;-webkit-transform: scaleX(-1);">reply</i></a>
+            <a class="right secondary-content blue-grey-text text-lighten-3" href="javascript:void(0);" data-activates="dropDown-{{project.id}}" dropdown data-hover="true">
+                <i class="material-icons">more_vert</i>
+            </a>
+            <!-- Dropdown Structure -->
+            <ul id='dropDown-{{project.id}}' class='dropdown-content'>
+                <li><a ng-click="delete(project)">Eliminar</a></li>
+            </ul>
         </li>
     </ul>
 </div>
@@ -18,7 +25,7 @@
     </a>
 </div>
 <!-- Modal Structure -->
-<div id="projectModal" class="modal modal-fixed-footer" ng-form="projectForm">
+<div id="projectModal" class="modal modal-fixed-footer" ng-form="projectForm" style="height:365px;" ng-class="error" novalidate>
     <div class="modal-content">
         <h5>Nuevo Proyecto</h5>
         <div class="input-field col s12">
@@ -26,19 +33,22 @@
             <label for="name">Nombre del proyecto</label>
         </div>
         <div class="input-field col s6">
-            <select class="browser-default" ng-model="project.project_type" material-select>
+            <select class="browser-default" ng-model="project.project_type" material-select required>
                 <option value="" disabled selected>Seleccione tipo de proyecto</option>
                 <option ng-repeat="projectType in projectTypes" value="{{projectType.id}}">{{projectType.name}}</option>
             </select>
         </div>
         <div class="input-field col s6">
-            <select class="browser-default" ng-model="project.customer_id" material-select>
+            <select class="browser-default" ng-model="project.customer_id" material-select required>
                 <option value="" disabled selected>Seleccione cliente</option>
                 <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
             </select>
         </div>
+        <div class="red-text" style="margin-top: 15px;" ng-show="error && projectForm.$invalid">
+            <span>Los campos son obligatorios</span>
+        </div>
     </div>
     <div class="modal-footer">
-        <a class="waves-effect waves-light btn modal-action modal-close" ng-click="save()" ng-disabled="projectForm.$invalid">Guardar</a>
+        <a class="waves-effect waves-light btn" ng-click="save()" ng-disabled="projectForm.$invalid">Guardar</a>
     </div>
 </div>
