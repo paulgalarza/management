@@ -18,7 +18,13 @@
             };
 
             var initProcess = function() {
-                $scope.processes = Processes.query();
+                Processes.query(function(processes) {
+                    $scope.processes = processes;
+                    _.each($scope.processes, function(process){
+                        process.requirement_id = process.requirement_id || '';
+                        process.error = '';
+                    });                 
+                });
                 $scope.process = {
                     requirement_id: 0
                 };
@@ -33,7 +39,8 @@
             };
 
             $scope.selectTab = function(tab) {
-                $scope.selectedTab = tab;
+                $scope.selectedTab = tab;     
+                $scope.resetCollapse();           
             }
 
             $scope.newProcess = function() {
@@ -48,12 +55,24 @@
                     process.project_id = $scope.project.id;
                     Processes.save(process, function(process) {
                         initProcess();
+                        $scope.resetCollapse();
                     });
                 }
             };
 
+            $scope.resetCollapse = function() {
+                $('.collapsible').collapsible({
+                    accordion: false
+                });
+            }
+
+            $scope.open = function(){
+                console.log('open');
+            }
             angular.element(document).ready(function() {
                 $('ul.tabs').tabs();
             });
+
+
         });
 })();
