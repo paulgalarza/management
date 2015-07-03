@@ -9,7 +9,7 @@ class UserController extends BaseController {
     public function load() {
         $id = Input::get('id');
         if($id == 0){
-            return json_encode(Users::all());
+            return json_encode(Users::with('role')->get());
         }
         return json_encode(Users::find($id));
     }
@@ -26,10 +26,12 @@ class UserController extends BaseController {
     }
 
      public function update() {
-        $id = Input::get('id');
-        $user = Users::find($id);
-        return json_encode(parent::baseUpdate($user));
-    }
+      $id = Input::get('id');
+      $user = Users::find($id);
+      $user->project_id = Input::get('project_id');
+      $user->save();
+      return json_encode($user);
+  }
 
     public function destroy() {
         $id = Input::get('id');

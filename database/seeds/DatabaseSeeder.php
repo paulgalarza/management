@@ -23,6 +23,24 @@ class UserRoles extends Seeder {
 		DB::table('user_roles')->insert([
             'name' 		=> 'admin'
         ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'RAP'
+        ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'RCP'
+        ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'Analista'
+        ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'Arquitecto'
+        ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'Desarrollador'
+        ]);
+        DB::table('user_roles')->insert([
+            'name'      => 'Tester'
+        ]);
 	}
 }
 

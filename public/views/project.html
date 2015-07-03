@@ -59,7 +59,7 @@
                 <label for="name">Clientes: </label>
             </div>
             <div class="col s7">
-                <select class="browser-default" ng-model="project.customer_id" material-select>
+                <select class="browser-default" ng-model="project.customer_id">
                     <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
                 </select>
             </div>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="input-field col s6">
-                    <select class="browser-default" ng-model="process.requirement_id" material-select>
+                    <select class="browser-default" ng-model="process.requirement_id">
                         <option value="" disabled selected>Seleccione un requerimiento</option>
                         <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
                     </select>
@@ -141,7 +141,18 @@
             </div>
         </div>
     </div>
-    <div ng-show="selectedTab === 4" class="col s12">Test 4</div>
+    <div ng-show="selectedTab === 4" class="col s12">
+        <ul class="collection">
+            <li class="collection-item avatar" ng-repeat="user in projectUsers">
+                <i class="material-icons circle">perm_identity</i>
+                <span class="title">{{user.name}}</span>
+                <p>{{user.role.name}}
+                    <br> Second Line
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+            </li>
+        </ul>
+    </div>
 </form>
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a ng-show="selectedTab === 1" class="btn-floating btn-large red">
@@ -151,6 +162,9 @@
         <i class="material-icons">book</i>
     </a>
     <a ng-show="selectedTab === 3" class="btn-floating btn-large red" ng-click="newActivity()">
+        <i class="material-icons">book</i>
+    </a>
+    <a ng-show="selectedTab === 4" class="btn-floating btn-large red" ng-click="newMember()">
         <i class="material-icons">book</i>
     </a>
 </div>
@@ -175,7 +189,7 @@
             </div>
         </div>
         <div class="input-field col s6">
-            <select class="browser-default" ng-model="process.requirement_id" material-select>
+            <select class="browser-default" ng-model="process.requirement_id">
                 <option value="0" disabled selected>Seleccione un requerimiento</option>
                 <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
             </select>
@@ -199,7 +213,7 @@
             </div>
         </div>
         <div class="input-field col s6">
-            <select class="browser-default" ng-model="_activity.process_id" material-select>
+            <select class="browser-default" ng-model="_activity.process_id">
                 <option value="" disabled selected>Seleccione un proceso</option>
                 <option ng-repeat="process in processes" value="{{process.id}}">{{process.name}}</option>
             </select>
@@ -212,4 +226,27 @@
         <a class="waves-effect waves-light btn" data-ng-click="saveActivity(_activity)">Guardar</a>
     </div>
 </div>
+<!-- Modal Structure -->
+<div id="memberModal" class="modal" ng-form="memberForm" ng-class="memberError">
+    <div class="modal-content">
+        <h5>Agregar Integrante</h5>
+        <div class="input-field col s12">
+            <select class="browser-default" ng-model="currentRole" ng-change="filterByRole(currentRole)">
+                <option value="" disabled selected>Seleccione un rol</option>
+                <option ng-repeat="role in user_roles" value="{{role.id}}">{{role.name}}</option>
+            </select>
+        </div>
+        <div class="input-field col s12">
+            <select class="browser-default" ng-model="currentUser">
+                <option value="" disabled selected>Seleccione un usuario</option>
+                <option ng-repeat="user in usersByRole" value="{{user.id}}">{{user.name}}</option>
+            </select>
+        </div>
+        <div ng-show="memberError">
+            <span class="red-text">Favor de llenar los campos obligatorios</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-light btn" data-ng-click="saveMember()">Guardar</a>
+    </div>
 </div>

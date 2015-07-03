@@ -9,5 +9,9 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class Users extends Model implements AuthenticatableContract, CanResetPasswordContract {
 	use Authenticatable, CanResetPassword;
 
+	public function role(){
+		return $this->belongsTo('App\Models\UserRoles', 'userRoles_id');
+	}
+
 
 }

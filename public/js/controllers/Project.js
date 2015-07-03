@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities) {
+        .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities, Users, UserRoles) {
             Projects.get({
                 id: $routeParams.projectId
             }, function(project) {
@@ -13,8 +13,19 @@
 
             var init = function() {
                 $scope.selectedTab = 1;
+                $scope.usersByRole = [];
                 $scope.customers = Customers.query();
+                Users.query(function(users){
+                    $scope.users = users;
+                    $scope.usersInProject();
+                });
+                UserRoles.query(function(user_roles) {
+                    $scope.user_roles = _.filter(user_roles, function(user_role) {
+                        return user_role.id != 1;
+                    });
+                });
                 $scope.project._status = $scope.project.status && true;
+                
             };
 
             var initProcess = function() {
@@ -45,6 +56,19 @@
                 };
             };
 
+            $scope.usersInProject = function() {
+                $scope.projectUsers = _.filter($scope.users, function(user) {
+                    return user.project_id == $scope.project.id;
+                });
+            };
+
+            $scope.filterByRole = function(role) {
+                $scope.usersByRole = _.filter($scope.users, function(user) {
+                    return user.userRoles_id == role;
+                });
+                $scope.currentUser = '';
+            };
+
             $scope.selectProcess = function(process) {
                 $scope.currentProcess = process;
                 $timeout(function() {
@@ -73,6 +97,10 @@
                 $('#activityModal').openModal();
             };
 
+            $scope.newMember = function() {
+                $('#memberModal').openModal();
+            };
+
             $scope.saveProcess = function(process) {
                 $scope.processError = 'has-error';
                 if ($scope.processForm.$valid) {
@@ -95,6 +123,27 @@
                         initActivity();
                         $scope.resetCollapse();
                     });
+                }
+            };
+
+            $scope.saveMember = function() {
+                $scope.memberError = 'has-error';
+                var user = _.find($scope.users, function(user) {
+                    return user.id == $scope.currentUser;
+                });
+                if ($scope.memberForm.$valid) {
+                    user.project_id = $scope.project.id;
+                    user.$update({
+                        id: user.id
+                    }, function(user) {
+                        $scope.currentUser = '';
+                        Users.query(function(users){
+                            $scope.users = users;
+                            $scope.usersInProject();
+                        });
+                    });
+                    $('#memberModal').closeModal();
+                    $scope.memberError = '';
                 }
             };
 

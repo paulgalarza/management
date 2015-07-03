@@ -8,7 +8,7 @@
                 $scope.projects = Projects.query();
                 $scope.customers = Customers.query();
                 $scope.projectTypes = ProjectTypes.query();
-            }
+            };
             init();
 
             $scope.getStatus = function(status) {
