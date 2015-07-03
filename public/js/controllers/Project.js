@@ -6,7 +6,9 @@
             Projects.get({
                 id: $routeParams.projectId
             }, function(project) {
+                console.log(project);
                 $scope.project = project;
+                var customerId = 
                 init();
                 initProcess();
             });
@@ -123,19 +125,6 @@
 
             $scope.newMember = function() {
                 $('#memberModal').openModal();
-            };
-
-            $scope.saveProcess = function(process) {
-                $scope.processError = 'has-error';
-                if ($scope.processForm.$valid) {
-                    $('#processModal').closeModal();
-                    $scope.processError = '';
-                    process.project_id = $scope.project.id;
-                    Processes.save(process, function(process) {
-                        initProcess();
-                        $scope.resetCollapse();
-                    });
-                }
             };
 
             $scope.saveActivity = function(activity, activityForm) {
