@@ -17,6 +17,7 @@ class CreateRequirementsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('folio')->nullable()->default('');
+			$table->string('name')->nullable()->default('');
 			$table->integer('project_id')->nullable()->unsigned()->default(0);
 			$table->string('file')->nullable()->default('');
 			$table->integer('status')->nullable()->default(1);

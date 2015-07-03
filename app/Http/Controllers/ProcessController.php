@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Processes;
 use Input;
+use Response;
 
 class ProcessController extends BaseController {
 
@@ -18,14 +19,15 @@ class ProcessController extends BaseController {
         return json_encode(parent::baseCreate(new Processes));
     }
 
-    public function update($id) {
+    public function update() {
+        $id = Input::get('id');
         $process = Processes::find($id);
         return json_encode(parent::baseUpdate($process));
     }
 
     public function destroy() {
         $id = Input::get('id');
-        $process = Processses::find($id);
+        $process = Processes::find($id);
         if(is_object($process)){
             $process->delete();    
         }

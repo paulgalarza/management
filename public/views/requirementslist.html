@@ -43,18 +43,25 @@
         </a>
     </div>
     <!-- Modal Structure -->
-    <div id="requirementModal" class="modal" ng-form="customerForm">
+    <div id="requirementModal" class="modal" ng-form="requirementForm" ng-class="error" novalidated>
         <div class="modal-content">
             <h5>Nuevo requerimiento</h5>
             <div class="input-field col s6">
                 <input type="text" class="validate" ng-model="requirement.folio" readonly="">
-                <label>Folio</label>
+                <label>Folio: </label>
             </div>
             <div class="input-field col s6">
-                <select class="browser-default" ng-model="requirement.project_id" material-select>
-                    <option value="0" disabled selected>Seleccione proyecto</option>
+                <input type="text" class="validate" ng-model="requirement.name" required>
+                <label>Nombre: </label>
+            </div>
+            <div class="input-field col s6">
+                <select class="browser-default" ng-model="requirement.project_id" required>
+                    <option value="" disabled selected>Seleccione proyecto</option>
                     <option ng-repeat="project in projects" value="{{project.id}}">{{project.name}}</option>
                 </select>
+            </div>
+            <div class="red-text" style="margin-top: 15px;" ng-show="error && requirementForm.$invalid">
+                <span>Los campos en rojo son obligatorios</span>
             </div>
         </div>
         <div class="modal-footer">

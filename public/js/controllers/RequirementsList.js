@@ -14,7 +14,7 @@
                 });
                 $scope.requirement = {
                     folio: null,
-                    project_id: 0
+                    project_id: ''
                 };
                 $scope.selected = null;
             }
@@ -26,10 +26,14 @@
             };
 
             $scope.save = function() {
-                $('#requirementModal').closeModal();
-                Requirements.save($scope.requirement, function(requirement) {
-                    init();
-                });
+                $scope.error = 'has-error';
+                if ($scope.requirementForm.$valid) {
+                    $('#requirementModal').closeModal();
+                    $scope.error = '';
+                    Requirements.save($scope.requirement, function(requirement) {
+                        init();
+                    });
+                }
             };
 
             $scope.lastFolio = function() {

@@ -1,229 +1,252 @@
-<div class="collection white row header" style="margin-bottom: 0px;">
-    <div class="col s12">
-        <a class="waves-effect waves-light btn right  green lighten-1" ng-click="save()">Guardar</a>
-        <a href="#proyectos" class="waves-effect waves-green btn-flat right">Regresar</a>
-    </div>
-</div>
-<div class="row collection" style="margin-top: -1px;">
-    <ul class="tabs">
-        <li class="tab col s3"><a ng-click="selectTab(1)" class="active cyan-text text-darken-1" href="javascript:void(0)">Datos</a></li>
-        <li class="tab col s3"><a ng-click="selectTab(2)" class="cyan-text text-darken-1" href="javascript:void(0)">Procesos</a></li>
-        <li class="tab col s3"><a ng-click="selectTab(3)" class="cyan-text text-darken-1" href="javascript:void(0)">Tareas</a></li>
-        <li class="tab col s3"><a ng-click="selectTab(4)" class="cyan-text text-darken-1" href="javascript:void(0)">Equipo</a></li>
-    </ul>
-</div>
-<form name="customer">
-    <div ng-show="selectedTab === 1" class="row collection white form">
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Nombre: </label>
-            </div>
-            <div class="col s7" input-field>
-                <input ng-model="project.name" id="name" type="text" class="validate" required length="255">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Descripcion: </label>
-            </div>
-            <div class="col s7" input-field>
-                <textarea ng-model="project.description" class="materialize-textarea" length="255"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Inicio: </label>
-            </div>
-            <div class="col s7" input-field>
-                <input input-date type="text" ng-model="project.start" today="hoy" clear="limpiar" close="cerrar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Final: </label>
-            </div>
-            <div class="col s7" input-field>
-                <input input-date type="text" ng-model="project.end" today="hoy" clear="limpiar" close="cerrar">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Costo: </label>
-            </div>
-            <div class="col s7" input-field>
-                <input type="text" ng-model="project.cost">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s3">
-                <label for="name">Clientes: </label>
-            </div>
-            <div class="col s7">
-                <select class="browser-default" ng-model="project.customer_id">
-                    <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <ul ng-show="selectedTab === 2" class="collapsible popout" data-collapsible="accordion">
-        <li ng-repeat="process in processes">
-            <div class="collapsible-header">{{process.name}} <span class="badge">{{process.start}}</span></div>
-            <div class="collapsible-body white" ng-form="processForm-{{process.id}}" ng-class="process.error">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="" id="name" type="text" class="validate" ng-model="process.name" required>
-                        <label for="name">Nombre</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input input-date type="text" format="dd/mm/yyyy" ng-model="process.start" today="hoy" clear="limpiar" close="cerrar" required>
-                        <label for="name">Inicio</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input input-date type="text" format="dd/mm/yyyy" ng-model="process.end" today="hoy" clear="limpiar" close="cerrar" required>
-                        <label for="name">Fin</label>
-                    </div>
-                </div>
-                <div class="input-field col s6">
-                    <select class="browser-default" ng-model="process.requirement_id">
-                        <option value="" disabled selected>Seleccione un requerimiento</option>
-                        <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
-                    </select>
-                </div>
-                <div ng-show="process.error">
-                    <span class="red-text">Favor de llenar los campos obligatorios</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div ng-show="selectedTab === 3" class="row">
-        <div class="col s4">
-            <div class="collection white">
-                <ul style="margin:0">
-                    <li class="menu-process_task" ng-repeat="process in processes" ng-class="{ 'active': (currentProcess.id === process.id) }" ng-click="selectProcess(process)">
-                        <a class="letter">{{process.name}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col s8">
-            <div>
-                <ul class="collapsible popout" data-collapsible="accordion">
-                    <li ng-repeat="activity in currentProcess.activities">
-                        <div class="collapsible-header">{{activity.name}}</div>
-                        <div class="collapsible-body white" ng-form="activityForm{{activity.id}}" ng-class="activity.error">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input placeholder="" id="name" type="text" class="validate" ng-model="activity.name" required>
-                                    <label for="name">Nombre</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input placeholder="" id="description" type="text" class="validate" ng-model="activity.description" required>
-                                    <label for="description">Descripción</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <input placeholder="" id="duration" type="number" class="validate" ng-model="activity.duration" required>
-                                    <label for="duration">Duración</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input placeholder="" id="progress" type="number" class="validate" ng-model="activity.progress" required>
-                                    <label for="progress">Progreso</label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div ng-show="selectedTab === 4" class="col s12">
-        <ul class="collection">
-            <li class="collection-item avatar" ng-repeat="user in projectUsers">
-                <i class="material-icons circle">perm_identity</i>
-                <span class="title">{{user.name}}</span>
-                <p>{{user.role.name}}
-                    <br> Second Line
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
+<div class="project">
+    <div class="row collection" style="margin-top: -1px;">
+        <ul class="tabs">
+            <li class="tab col s3"><a ng-click="selectTab(1)" class="active cyan-text text-darken-1" href="javascript:void(0)">Datos</a></li>
+            <li class="tab col s3"><a ng-click="selectTab(4)" class="cyan-text text-darken-1" href="javascript:void(0)">Equipo</a></li>
+            <li class="tab col s3"><a ng-click="selectTab(2)" class="cyan-text text-darken-1" href="javascript:void(0)">Procesos</a></li>
+            <li class="tab col s3"><a ng-click="selectTab(3)" class="cyan-text text-darken-1" href="javascript:void(0)">Tareas</a></li>
         </ul>
     </div>
-</form>
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a ng-show="selectedTab === 1" class="btn-floating btn-large red">
-        <i class="large mdi-content-add"></i>
-    </a>
-    <a ng-show="selectedTab === 2" class="btn-floating btn-large red" ng-click="newProcess()">
-        <i class="material-icons">book</i>
-    </a>
-    <a ng-show="selectedTab === 3" class="btn-floating btn-large red" ng-click="newActivity()">
-        <i class="material-icons">book</i>
-    </a>
-    <a ng-show="selectedTab === 4" class="btn-floating btn-large red" ng-click="newMember()">
-        <i class="material-icons">book</i>
-    </a>
-</div>
-<!-- Modal Structure -->
-<div id="processModal" class="modal" ng-form="processForm" ng-class="processError">
-    <div class="modal-content">
-        <h5>Nuevo proceso</h5>
-        <div class="row">
-            <div class="input-field col s12">
-                <input placeholder="" id="name" type="text" class="validate" ng-model="process.name" required>
-                <label for="name">Nombre</label>
+    <form name="customer">
+        <div ng-show="selectedTab === 1" class="row collection white form">
+            <div class="row">
+                <div class="col s10">
+                    <a class="waves-effect waves-light btn right  green lighten-1" ng-click="save()">Guardar</a>
+                    <a href="#proyectos" class="waves-effect waves-green btn-flat right">Regresar</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Nombre: </label>
+                </div>
+                <div class="col s7" input-field>
+                    <input ng-model="project.name" id="name" type="text" class="validate" required length="255">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Descripcion: </label>
+                </div>
+                <div class="col s7" input-field>
+                    <textarea ng-model="project.description" class="materialize-textarea" length="255"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Inicio: </label>
+                </div>
+                <div class="col s7" input-field>
+                    <input input-date type="text" ng-model="project.start" today="hoy" clear="limpiar" close="cerrar">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Final: </label>
+                </div>
+                <div class="col s7" input-field>
+                    <input input-date type="text" ng-model="project.end" today="hoy" clear="limpiar" close="cerrar">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Costo: </label>
+                </div>
+                <div class="col s7" input-field>
+                    <input type="text" ng-model="project.cost">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <label for="name">Clientes: </label>
+                </div>
+                <div class="col s7">
+                    <select class="browser-default" ng-model="project.customer_id">
+                        <option ng-repeat="customer in customers" value="{{customer.id}}">{{customer.name}}</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <ul ng-show="selectedTab === 2" class="collapsible popout row" data-collapsible="accordion">
+            <li ng-repeat="process in processes">
+                <div class="collapsible-header">
+                    {{process.name}}
+                    <a class="right secondary-content blue-grey-text text-lighten-3" href="javascript:void(0);">
+                        <i class="material-icons" ng-click="removeProcess(process)">delete</i>
+                    </a>
+                </div>
+                <div class="collapsible-body white" ng-form="processFormEdit" ng-class="process.error">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="" id="name" type="text" ng-model="process.name" required>
+                            <label for="name">Nombre</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label>Inicio</label>
+                            <input type="date" ng-model="process.start" required>
+                        </div>
+                        <div class="col s6">
+                            <label>Fin</label>
+                            <input type="date" ng-model="process.endProcess" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select class="browser-default" ng-model="process.requirement_id">
+                                <option value="" disabled ng-show="process.requirement_id">Seleccione un requerimiento</option>
+                                <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div ng-show="process.error">
+                        <span class="red-text">Favor de llenar los campos obligatorios</span>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <a class="waves-effect waves-light btn right  green lighten-1" ng-click="saveProcess(process, processFormEdit)">Guardar</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div ng-show="selectedTab === 3" class="row">
+            <div class="col s4">
+                <div class="collection white">
+                    <ul style="margin:0">
+                        <li class="menu-process_task" ng-repeat="process in processes" ng-class="{ 'active': (currentProcess.id === process.id) }" ng-click="selectProcess(process)">
+                            <a class="letter">{{process.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col s8">
+                <div>
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li ng-repeat="activity in currentProcess.activities">
+                            <div class="collapsible-header">{{activity.name}}
+                                <a class="right secondary-content blue-grey-text text-lighten-3" href="javascript:void(0);">
+                                    <i class="material-icons" ng-click="removeActivity(activity)">delete</i>
+                                </a>
+                            </div>
+                            <div class="collapsible-body white" ng-form="activityForm" ng-class="activity.error">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input placeholder="" id="name" type="text" class="validate" ng-model="activity.name" required>
+                                        <label for="name">Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input placeholder="" id="description" type="text" class="validate" ng-model="activity.description" required>
+                                        <label for="description">Descripción</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input placeholder="" id="duration" type="number" class="validate" ng-model="activity.duration" required>
+                                        <label for="duration">Duración</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input placeholder="" id="progress" type="number" class="validate" ng-model="activity.progress" required>
+                                        <label for="progress">Progreso</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <a class="waves-effect waves-light btn right  green lighten-1" ng-click="saveActivity(activity, activityForm)">Guardar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div ng-show="selectedTab === 4" class="col s12">
+            <ul class="collection">
+                <li class="collection-item avatar" ng-repeat="user in projectUsers">
+                    <i class="material-icons circle">perm_identity</i>
+                    <span class="title">{{user.name}}</span>
+                    <p>{{user.role.name}}
+                        <br> Second Line
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a ng-show="selectedTab === 1" class="btn-floating btn-large red">
+            <i class="large mdi-content-add"></i>
+        </a>
+        <a ng-show="selectedTab === 2" class="btn-floating btn-large red" ng-click="modalProcess()">
+            <i class="material-icons">book</i>
+        </a>
+        <a ng-show="selectedTab === 3" class="btn-floating btn-large red" ng-click="newActivity()">
+            <i class="material-icons">book</i>
+        </a>
+        <a ng-show="selectedTab === 4" class="btn-floating btn-large red" ng-click="newMember()">
+            <i class="material-icons">book</i>
+        </a>
+    </div>
+    <!-- Modal Structure -->
+    <div id="processModal" class="modal" ng-form="processForm" ng-class="processError">
+        <div class="modal-content">
+            <h5>Nuevo proceso</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="name" type="text" class="validate" ng-model="newProcess.name" required>
+                    <label for="name">Nombre</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <label>Inicio:</label>
+                    <input type="date" ng-model="newProcess.start" date-fix>
+                </div>
+                <div class="col s6">
+                    <label>Fin:</label>
+                    <input type="date" ng-model="newProcess.endProcess" date-fix>
+                </div>
+            </div>
             <div class="input-field col s6">
-                <input input-date type="text" format="dd/mm/yyyy" ng-model="process.start" today="hoy" clear="limpiar" close="cerrar" required>
-                <label for="name">Inicio</label>
+                <select class="browser-default" ng-model="newProcess.requirement_id" material-select>
+                    <option value="" disabled selected>Seleccione un requerimiento</option>
+                    <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
+                </select>
+            </div>
+            <div ng-show="processError">
+                <span class="red-text">Favor de llenar los campos obligatorios</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn" data-ng-click="saveProcess(newProcess)">Guardar</a>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="activityModal" class="modal" ng-form="activityForm" ng-class="activityError">
+        <div class="modal-content">
+            <h5>Nueva Tarea</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="" id="name" type="text" class="validate" ng-model="_activity.name" required>
+                    <label for="name">Nombre</label>
+                </div>
             </div>
             <div class="input-field col s6">
-                <input input-date type="text" format="dd/mm/yyyy" ng-model="process.end" today="hoy" clear="limpiar" close="cerrar" required>
-                <label for="name">Fin</label>
+                <select class="browser-default" ng-model="_activity.process_id" material-select>
+                    <option value="" disabled selected>Seleccione un proceso</option>
+                    <option ng-repeat="process in processes" value="{{process.id}}">{{process.name}}</option>
+                </select>
+            </div>
+            <div ng-show="activityError">
+                <span class="red-text">Favor de llenar los campos obligatorios</span>
             </div>
         </div>
-        <div class="input-field col s6">
-            <select class="browser-default" ng-model="process.requirement_id">
-                <option value="0" disabled selected>Seleccione un requerimiento</option>
-                <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
-            </select>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn" data-ng-click="saveActivity(_activity)">Guardar</a>
         </div>
-        <div ng-show="processError">
-            <span class="red-text">Favor de llenar los campos obligatorios</span>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn" data-ng-click="saveProcess(process)">Guardar</a>
-    </div>
-</div>
-<!-- Modal Structure -->
-<div id="activityModal" class="modal" ng-form="activityForm" ng-class="activityError">
-    <div class="modal-content">
-        <h5>Nueva Tarea</h5>
-        <div class="row">
-            <div class="input-field col s12">
-                <input placeholder="" id="name" type="text" class="validate" ng-model="_activity.name" required>
-                <label for="name">Nombre</label>
-            </div>
-        </div>
-        <div class="input-field col s6">
-            <select class="browser-default" ng-model="_activity.process_id">
-                <option value="" disabled selected>Seleccione un proceso</option>
-                <option ng-repeat="process in processes" value="{{process.id}}">{{process.name}}</option>
-            </select>
-        </div>
-        <div ng-show="activityError">
-            <span class="red-text">Favor de llenar los campos obligatorios</span>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-light btn" data-ng-click="saveActivity(_activity)">Guardar</a>
     </div>
 </div>
 <!-- Modal Structure -->
