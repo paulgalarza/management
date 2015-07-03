@@ -18,7 +18,7 @@ class CreateProcessesTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->default('');
 			$table->dateTime('start')->nullable()->default(date("Y-m-d H:i:s"));
-			$table->dateTime('end')->nullable()->default(date("Y-m-d H:i:s"));
+			$table->dateTime('endProcess')->nullable()->default(date("Y-m-d H:i:s"));
 			$table->integer('project_id')->unsigned()->nullable()->default(0);
 			$table->integer('requirement_id')->unsigned()->nullable()->default(0);
 			$table->foreign('project_id')
