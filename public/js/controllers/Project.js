@@ -2,11 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-<<<<<<< HEAD
-        .controller('ProjectController', function($scope, $routeParams, $location, Projects, Customers, Processes, Requirements) {
-=======
         .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities) {
->>>>>>> 950a9f5fcb04718bd87c56ae2267adb37389e96e
             Projects.get({
                 id: $routeParams.projectId
             }, function(project) {
@@ -27,16 +23,9 @@
                     $scope.processes = processes;
                     _.each($scope.processes, function(process) {
                         process.requirement_id = process.requirement_id || '';
-<<<<<<< HEAD
-                        process.start = new Date(2013, 9, 22);
-                        process.endProcess = new Date(2013, 9, 22);
-                    });
-=======
                         process.error = '';
-
                     });
                     $scope.selectProcess(processes[0]);
->>>>>>> 950a9f5fcb04718bd87c56ae2267adb37389e96e
                 });
                 $scope.newProcess = {
                     requirement_id: ''
