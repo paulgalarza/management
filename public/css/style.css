@@ -182,3 +182,24 @@
  .password-error .ng-invalid {
      border-color: #f44334;
  }
+ 
+ .menu-process_task {
+     transition: border .218s;
+     background-color: white;
+     border-left: 2px solid transparent;
+     color: #737373;
+     list-style: none;
+     margin-top: 1px;
+     padding: 9px 18px;
+     border-bottom: 1px solid #e0e0e0;
+     cursor: pointer;
+ }
+ 
+ .menu-process_task.active {
+     font-weight: bold;
+     border-left: 2px solid #00ACC1;
+ }
+ 
+ .letter {
+     color: #525A5E;
+ }

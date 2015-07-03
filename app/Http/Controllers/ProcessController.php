@@ -10,7 +10,7 @@ class ProcessController extends BaseController {
     public function load() {
         $id = Input::get('id');
         if($id == 0){
-            return Response::json(Processes::all());
+            return json_encode(Processes::with('activities')->get());
         }
         return json_encode(Processes::find($id));
     }
@@ -27,8 +27,10 @@ class ProcessController extends BaseController {
 
     public function destroy() {
         $id = Input::get('id');
-        $process = Processes::find($id);
-        $process->delete();
+        $process = Processses::find($id);
+        if(is_object($process)){
+            $process->delete();    
+        }
         return json_encode($id);
     }
 

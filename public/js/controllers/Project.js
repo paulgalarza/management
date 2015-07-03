@@ -2,7 +2,11 @@
     'use strict';
     angular
         .module('sidcasoft')
+<<<<<<< HEAD
         .controller('ProjectController', function($scope, $routeParams, $location, Projects, Customers, Processes, Requirements) {
+=======
+        .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities) {
+>>>>>>> 950a9f5fcb04718bd87c56ae2267adb37389e96e
             Projects.get({
                 id: $routeParams.projectId
             }, function(project) {
@@ -23,13 +27,40 @@
                     $scope.processes = processes;
                     _.each($scope.processes, function(process) {
                         process.requirement_id = process.requirement_id || '';
+<<<<<<< HEAD
                         process.start = new Date(2013, 9, 22);
                         process.endProcess = new Date(2013, 9, 22);
                     });
+=======
+                        process.error = '';
+
+                    });
+                    $scope.selectProcess(processes[0]);
+>>>>>>> 950a9f5fcb04718bd87c56ae2267adb37389e96e
                 });
                 $scope.newProcess = {
                     requirement_id: ''
                 };
+            };
+
+            var initActivity = function() {
+                Activities.query(function(activities) {
+                    $scope.activities = activities;
+                    _.each($scope.activities, function(activity) {
+                        activity.process_id = activity.process_id || '';
+                        activity.error = '';
+                    });
+                });
+                $scope._activity = {
+                    process_id: ''
+                };
+            };
+
+            $scope.selectProcess = function(process) {
+                $scope.currentProcess = process;
+                $timeout(function() {
+                    $scope.resetCollapse();
+                }, 300);
             };
 
             $scope.save = function() {
@@ -43,7 +74,7 @@
             $scope.selectTab = function(tab) {
                 $scope.selectedTab = tab;
                 $scope.resetCollapse();
-            }
+            };
 
             $scope.modalProcess = function() {
                 $('#processModal').openModal();
@@ -69,8 +100,22 @@
                         });
                     }
                 }
+            };
 
+            $scope.newActivity = function() {
+                $('#activityModal').openModal();
+            };
 
+            $scope.saveActivity = function(activity) {
+                $scope.activityError = 'has-error';
+                if ($scope.activityForm.$valid) {
+                    $('#activityModal').closeModal();
+                    $scope.activityError = '';
+                    Activities.save(activity, function(activity) {
+                        initActivity();
+                        $scope.resetCollapse();
+                    });
+                }
             };
 
             $scope.resetCollapse = function() {
