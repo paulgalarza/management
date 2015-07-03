@@ -27,7 +27,7 @@ class ProcessController extends BaseController {
 
     public function destroy() {
         $id = Input::get('id');
-        $process = Processses::find($id);
+        $process = Processes::find($id);
         if(is_object($process)){
             $process->delete();    
         }

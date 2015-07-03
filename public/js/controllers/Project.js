@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('sidcasoft')
-        .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities) {
+        .controller('ProjectController', function($scope, $routeParams, $timeout, $location, Projects, Customers, Processes, Activities, Requirements) {
             Projects.get({
                 id: $routeParams.projectId
             }, function(project) {
@@ -23,6 +23,8 @@
                     $scope.processes = processes;
                     _.each($scope.processes, function(process) {
                         process.requirement_id = process.requirement_id || '';
+                        process.start = new Date(process.start);
+                        process.endProcess = new Date(process.endProcess);
                         process.error = '';
                     });
                     $scope.selectProcess(processes[0]);
@@ -95,16 +97,36 @@
                 $('#activityModal').openModal();
             };
 
-            $scope.saveActivity = function(activity) {
-                $scope.activityError = 'has-error';
-                if ($scope.activityForm.$valid) {
-                    $('#activityModal').closeModal();
-                    $scope.activityError = '';
-                    Activities.save(activity, function(activity) {
-                        initActivity();
-                        $scope.resetCollapse();
-                    });
+            $scope.saveActivity = function(activity, activityForm) {
+                if (activity.id) {
+                    activity.error = 'has-error';
+                    var _activity = activity;
+                    if (activityForm.$valid) {
+                        activity = Activities.get({
+                            id: activity.id
+                        }, function(activity) {
+                            activity.name = _activity.name;
+                            activity.description = _activity.duration;
+                            activity.duration = _activity.duration;
+                            activity.progress = _activity.progress;
+                            activity.$update(function(activity) {
+                                swal("Guardado exitoso!", "Los cambios han sido guardados correctamente!", "success");
+                            });
+                        });
+                    }
+                } else {
+                    $scope.activityError = 'has-error';
+                    if ($scope.activityForm.$valid) {
+                        $('#activityModal').closeModal();
+                        $scope.activityError = '';
+                        Activities.save(activity, function(activity) {
+                            $scope.currentProcess.activities.push(activity);
+                            initActivity();
+                            $scope.resetCollapse();
+                        });
+                    }
                 }
+
             };
 
             $scope.resetCollapse = function() {
@@ -125,20 +147,48 @@
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "Aceptar",
-                    cancelButtonText : 'Cancelar',
+                    cancelButtonText: 'Cancelar',
                     closeOnConfirm: false
                 }, function() {
                     process.$delete({
                         id: process.id
-                    }, function(process){
-                        $scope.processes = _.filter($scope.processes, function(_process){
+                    }, function(process) {
+                        $scope.processes = _.filter($scope.processes, function(_process) {
                             return process.id !== _process.id;
                         });
-                        swal("Eliminado!", "El proceso a sido eliminado.", "success");    
+                        swal("Eliminado!", "El proceso a sido eliminado.", "success");
                     })
-                    
+
                 });
             };
+
+            $scope.removeActivity = function(activity) {
+                swal({
+                    title: "¿Desea eliminar la actividad?",
+                    text: "No podra recuperar la actividad eliminado!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: false
+                }, function() {
+                    Activities.get({
+                        id: activity.id
+                    }, function(activity) {
+                        activity.$delete({
+                            id: activity.id
+                        }, function(activity) {
+                            $scope.currentProcess.activities = _.filter($scope.currentProcess.activities, function(_activity) {
+                                return activity.id != _activity.id;
+                            });
+                            swal("Eliminado!", "El proceso a sido eliminado.", "success");
+                        });
+                    });
+
+
+                });
+            }
 
             angular.element(document).ready(function() {
                 $('ul.tabs').tabs();

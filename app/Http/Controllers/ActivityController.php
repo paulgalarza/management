@@ -23,7 +23,8 @@ class ActivityController extends BaseController {
         return Response::json($activity);
     }
 
-    public function update($id) {
+    public function update() {
+        $id = Input::get('id');
         $activity = Activities::find($id);
         return json_encode(parent::baseUpdate($activity));
     }
@@ -34,7 +35,7 @@ class ActivityController extends BaseController {
         if(is_object($activity)){
             $activity->delete();    
         }
-        return json_encode($id);
+        return json_encode($activity);
     }
 
 }

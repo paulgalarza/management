@@ -124,8 +124,12 @@
                 <div>
                     <ul class="collapsible popout" data-collapsible="accordion">
                         <li ng-repeat="activity in currentProcess.activities">
-                            <div class="collapsible-header">{{activity.name}}</div>
-                            <div class="collapsible-body white" ng-form="activityForm{{activity.id}}" ng-class="activity.error">
+                            <div class="collapsible-header">{{activity.name}}
+                                <a class="right secondary-content blue-grey-text text-lighten-3" href="javascript:void(0);">
+                                    <i class="material-icons" ng-click="removeActivity(activity)">delete</i>
+                                </a>
+                            </div>
+                            <div class="collapsible-body white" ng-form="activityForm" ng-class="activity.error">
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <input placeholder="" id="name" type="text" class="validate" ng-model="activity.name" required>
@@ -148,6 +152,11 @@
                                         <label for="progress">Progreso</label>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <a class="waves-effect waves-light btn right  green lighten-1" ng-click="saveActivity(activity, activityForm)">Guardar</a>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -163,14 +172,6 @@
         <a ng-show="selectedTab === 2" class="btn-floating btn-large red" ng-click="modalProcess()">
             <i class="material-icons">book</i>
         </a>
-    </div>
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a ng-show="selectedTab === 1" class="btn-floating btn-large red">
-            <i class="large mdi-content-add"></i>
-        </a>
-        <a ng-show="selectedTab === 2" class="btn-floating btn-large red" ng-click="newProcess()">
-            <i class="material-icons">book</i>
-        </a>
         <a ng-show="selectedTab === 3" class="btn-floating btn-large red" ng-click="newActivity()">
             <i class="material-icons">book</i>
         </a>
@@ -181,22 +182,32 @@
             <h5>Nuevo proceso</h5>
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="" id="name" type="text" class="validate" ng-model="process.name" required>
+                    <input id="name" type="text" class="validate" ng-model="newProcess.name" required>
                     <label for="name">Nombre</label>
                 </div>
-                <div class="input-field col s6">
-                    <select class="browser-default" ng-model="newProcess.requirement_id" material-select>
-                        <option value="" disabled selected>Seleccione un requerimiento</option>
-                        <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
-                    </select>
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <label>Inicio:</label>
+                    <input type="date" ng-model="newProcess.start" date-fix>
                 </div>
-                <div ng-show="processError">
-                    <span class="red-text">Favor de llenar los campos obligatorios</span>
+                <div class="col s6">
+                    <label>Fin:</label>
+                    <input type="date" ng-model="newProcess.endProcess" date-fix>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a class="waves-effect waves-light btn" data-ng-click="saveProcess(newProcess)">Guardar</a>
+            <div class="input-field col s6">
+                <select class="browser-default" ng-model="newProcess.requirement_id" material-select>
+                    <option value="" disabled selected>Seleccione un requerimiento</option>
+                    <option ng-repeat="requirement in requirements" value="{{requirement.id}}">{{requirement.name}}</option>
+                </select>
             </div>
+            <div ng-show="processError">
+                <span class="red-text">Favor de llenar los campos obligatorios</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn" data-ng-click="saveProcess(newProcess)">Guardar</a>
         </div>
     </div>
     <!-- Modal Structure -->
